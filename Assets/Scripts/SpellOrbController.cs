@@ -56,7 +56,8 @@ public class SpellOrbController : MonoBehaviour
     public void DestroyOrb(){
         foreach(GameObject go in route){
             Destroy(go);
-            Destroy(this.gameObject);
+            
         }
+        Destroy(this.gameObject);
     }
 }

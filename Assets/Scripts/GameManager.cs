@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public OrbManager orbManager;
+
     public GameObject endMenu;
     public bool isGameOver = false;
 
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     public void StartGame(){
         isGameOver = false;
         orbManager.StartCreatingOrbs();
+        PlayerManager.instance.OnGameStart();
         
     }
 

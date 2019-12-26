@@ -74,9 +74,14 @@ public class OrbManager : MonoBehaviour
 
     }
     public void DestroyOrbs(){
+    
         foreach (SpellOrbController soc in orbs)
         {
+ 
             soc.DestroyOrb();
+
+            
         }
+        orbs = new List<SpellOrbController>();
     }
 }

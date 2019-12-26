@@ -6,12 +6,7 @@ public class ThrowingManager : MonoBehaviour
 {
 
     public OrbManager orbManager;
-
-    void Start()
-    {
-
-    }
-
+    public PlayerManager playerManager;
 
 
     public void ThrowKnife(string icon)
@@ -23,7 +18,7 @@ public class ThrowingManager : MonoBehaviour
             {
                 orbManager.orbs.RemoveAt(i);
                 soc.DestroyOrb();
-                //Destroy(soc.gameObject);
+                playerManager.AddPoints();
                 break;
 
             }
