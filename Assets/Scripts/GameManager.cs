@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject endMenu;
     public bool isGameOver = false;
+    public int level = 1; //value for changing speeds and spawn delays as game progresses. player wont see this
 
     void Start()
     {

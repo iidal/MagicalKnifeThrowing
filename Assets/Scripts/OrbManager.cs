@@ -9,6 +9,9 @@ public class OrbManager : MonoBehaviour
 
     public List<SpellOrbController> orbs = new List<SpellOrbController>();
 
+    float defaultSpawnSpeed = 1.5f;
+    float spawnSpeed;
+
     //route points
     float point1min = -1.25f;
     float point1max = 1.25f;
@@ -20,7 +23,7 @@ public class OrbManager : MonoBehaviour
 
     void Start()
     {
-
+        spawnSpeed = defaultSpawnSpeed;
     }
 
 
@@ -33,7 +36,11 @@ public class OrbManager : MonoBehaviour
         while (GameManager.instance.isGameOver == false)
         {
             CreateOrb();
-            yield return new WaitForSeconds(3f);
+            
+            yield return new WaitForSeconds(spawnSpeed);
+
+            
+           
         }
     }
 
@@ -43,6 +50,7 @@ public class OrbManager : MonoBehaviour
         GameObject go = Instantiate(orbPrefabs[rand], transform.position, Quaternion.identity);
         go.GetComponent<SpellOrbController>().route = CreateRoutePoints();
         orbs.Add(go.GetComponent<SpellOrbController>());
+        spawnSpeed = defaultSpawnSpeed - (GameManager.instance.level / 100);
 
     }
 

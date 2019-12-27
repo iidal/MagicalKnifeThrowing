@@ -26,6 +26,9 @@ public class PlayerManager : MonoBehaviour
     public void AddPoints(){
         score++;
         scoreText.text = score.ToString();
+        if(score % 10 == 0){
+            GameManager.instance.level++;
+        }
     }
 
     public void OnGameStart(){
