@@ -19,6 +19,8 @@ public class OrbManager : MonoBehaviour
     float middlePointMax = 2.5f;
 
     [SerializeField]
+    Transform[] startPositions;
+    [SerializeField]
     GameObject playerPoint;
 
     void Start()
@@ -47,23 +49,27 @@ public class OrbManager : MonoBehaviour
     void CreateOrb()
     {
         int rand = Random.Range(0, orbPrefabs.Length);
-        GameObject go = Instantiate(orbPrefabs[rand], transform.position, Quaternion.identity);
-        go.GetComponent<SpellOrbController>().route = CreateRoutePoints();
+        int posRand = Random.Range(0,2); //which startposition to use
+        GameObject go = Instantiate(orbPrefabs[rand],  startPositions[posRand].position, Quaternion.identity);
+        go.GetComponent<SpellOrbController>().route = CreateRoutePoints(posRand);
         orbs.Add(go.GetComponent<SpellOrbController>());
+
+        //update spawnspeed
         spawnSpeed = defaultSpawnSpeed - (GameManager.instance.level / 100);
 
     }
 
 
 
-    GameObject[] CreateRoutePoints()
+    GameObject[] CreateRoutePoints(int index)
     {
 
         GameObject[] points = new GameObject[4];
 
         //start point
         GameObject tempPoint1 = new GameObject("point1");
-        tempPoint1.transform.position = new Vector2(Random.Range(point1min, point1max), 2.6f);
+        tempPoint1.transform.position = startPositions[index].position;
+        //tempPoint1.transform.position = new Vector2(Random.Range(point1min, point1max), 2.6f);
         points[0] = tempPoint1;
         //2nd point
         GameObject tempPoint2 = new GameObject("point2");

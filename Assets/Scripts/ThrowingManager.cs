@@ -8,6 +8,7 @@ public class ThrowingManager : MonoBehaviour
     public OrbManager orbManager;
     public PlayerManager playerManager;
     public GameObject knife;
+    public Transform knifeSpawn;
 
     public delegate void ThrowAndDelete(SpellOrbController o);
 
@@ -24,7 +25,7 @@ public class ThrowingManager : MonoBehaviour
             {
                 
                 ThrowAndDelete callback = DeleteOrbAndKinfe;
-                GameObject k = Instantiate(knife, transform.position, Quaternion.identity);
+                GameObject k = Instantiate(knife, knifeSpawn.position, Quaternion.identity);
                 k.GetComponent<KnifeController>().StartMove(soc.gameObject.transform, callback, soc);
                 orbManager.orbs.RemoveAt(i);
                 yield return null;
