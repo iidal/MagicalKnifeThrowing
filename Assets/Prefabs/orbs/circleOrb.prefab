@@ -143,6 +143,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: circle
   route: []
+  speed: 0.5
+  destroyBursts: {fileID: 1593238258705100326, guid: cf0ca4e014a5660458e82ddcda77ab66,
+    type: 3}
+  orbBaseSprite: {fileID: 2273452286647827462}
 --- !u!1 &2273452286647827480
 GameObject:
   m_ObjectHideFlags: 0

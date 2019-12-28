@@ -7,16 +7,24 @@ public class SpellOrbController : MonoBehaviour
 
     public string icon = "swirl"; // get this when instatiated
 
+    //moving
     public GameObject[] route;
     private bool followCoroutineEnded = true;
     private float tParam;
     public float speed = 0.5f;
     private Vector2 newPos;
+    
+    //particles
+    public GameObject destroyBursts;
 
+
+    Color mainColor;
+    [SerializeField]
+    SpriteRenderer orbBaseSprite;
 
     void Start()
     {
-       
+        mainColor = orbBaseSprite.color;
     }
 
      void Update(){
@@ -61,6 +69,8 @@ public class SpellOrbController : MonoBehaviour
             Destroy(go);
             
         }
+        GameObject temp =  Instantiate(destroyBursts, transform.position, Quaternion.identity);
+        temp.GetComponent<particleController>().AdjustColors(mainColor);
         Destroy(this.gameObject);
     }
 }
