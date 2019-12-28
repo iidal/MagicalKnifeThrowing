@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame(){
         isGameOver = false;
+        level = 1;
         orbManager.StartCreatingOrbs();
         PlayerManager.instance.OnGameStart();
         

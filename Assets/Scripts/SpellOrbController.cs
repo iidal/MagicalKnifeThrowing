@@ -10,14 +10,13 @@ public class SpellOrbController : MonoBehaviour
     public GameObject[] route;
     private bool followCoroutineEnded = true;
     private float tParam;
-    float defaultSpeed = 0.5f;
-    float speed;
+    public float speed = 0.5f;
     private Vector2 newPos;
 
 
     void Start()
     {
-        
+       
     }
 
      void Update(){
@@ -29,8 +28,9 @@ public class SpellOrbController : MonoBehaviour
      }
     IEnumerator FollowRoute(){
 
-        speed = defaultSpeed + (GameManager.instance.level / 100);
-
+      
+        
+       
         followCoroutineEnded = false;
 
         Vector2 p0 = route[0].transform.position;

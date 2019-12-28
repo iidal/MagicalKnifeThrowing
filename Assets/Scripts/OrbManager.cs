@@ -23,13 +23,18 @@ public class OrbManager : MonoBehaviour
     [SerializeField]
     GameObject playerPoint;
 
+    //orb speed
+    float defaultOrbSpeed = 0.5f;
+    float orbSpeed;
     void Start()
     {
         spawnSpeed = defaultSpawnSpeed;
+        orbSpeed = defaultOrbSpeed;
     }
 
 
-    public void StartCreatingOrbs(){
+    public void StartCreatingOrbs()
+    {
         StartCoroutine("Create");
     }
 
@@ -38,25 +43,35 @@ public class OrbManager : MonoBehaviour
         while (GameManager.instance.isGameOver == false)
         {
             CreateOrb();
-            
+
             yield return new WaitForSeconds(spawnSpeed);
 
-            
-           
+
+
         }
     }
 
     void CreateOrb()
     {
         int rand = Random.Range(0, orbPrefabs.Length);
-        int posRand = Random.Range(0,2); //which startposition to use
-        GameObject go = Instantiate(orbPrefabs[rand],  startPositions[posRand].position, Quaternion.identity);
-        go.GetComponent<SpellOrbController>().route = CreateRoutePoints(posRand);
-        orbs.Add(go.GetComponent<SpellOrbController>());
+        int posRand = Random.Range(0, 2); //which startposition to use
+        GameObject go = Instantiate(orbPrefabs[rand], startPositions[posRand].position, Quaternion.identity);
+        SpellOrbController tempContr =  go.GetComponent<SpellOrbController>();
+        tempContr.route = CreateRoutePoints(posRand);
+        tempContr.speed = orbSpeed;
+        orbs.Add(tempContr);
 
         //update spawnspeed
-        spawnSpeed = defaultSpawnSpeed - (GameManager.instance.level / 100);
-
+        if (spawnSpeed > 0.1f)
+        {
+            float decrease = ((float)GameManager.instance.level * 5) / 100;
+            spawnSpeed = defaultSpawnSpeed - decrease;
+        }
+        if(orbSpeed<3f){
+            float increase = ((float)GameManager.instance.level * 2) / 100;
+            orbSpeed = defaultOrbSpeed+ increase;
+            Debug.Log(orbSpeed);
+        }
     }
 
 
@@ -87,14 +102,15 @@ public class OrbManager : MonoBehaviour
         return points;
 
     }
-    public void DestroyOrbs(){
-    
+    public void DestroyOrbs()
+    {
+
         foreach (SpellOrbController soc in orbs)
         {
- 
+
             soc.DestroyOrb();
 
-            
+
         }
         orbs = new List<SpellOrbController>();
     }
