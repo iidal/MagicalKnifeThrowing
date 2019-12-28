@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\OrbRouteManager.cs" />
      <Compile Include="Assets\Scripts\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\SpellOrbController.cs" />
+     <Compile Include="Assets\Scripts\StartMenuManager.cs" />
      <Compile Include="Assets\Scripts\ThrowingManager.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

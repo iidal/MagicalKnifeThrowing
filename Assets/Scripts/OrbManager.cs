@@ -70,7 +70,6 @@ public class OrbManager : MonoBehaviour
         if(orbSpeed<3f){
             float increase = ((float)GameManager.instance.level * 2) / 100;
             orbSpeed = defaultOrbSpeed+ increase;
-            Debug.Log(orbSpeed);
         }
     }
 
