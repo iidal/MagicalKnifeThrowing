@@ -55,11 +55,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\particleController.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\KnifeController.cs" />
      <Compile Include="Assets\Scripts\OrbManager.cs" />
      <Compile Include="Assets\Scripts\OrbRouteManager.cs" />
+     <Compile Include="Assets\Scripts\particleController.cs" />
      <Compile Include="Assets\Scripts\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\SpellOrbController.cs" />
      <Compile Include="Assets\Scripts\StartMenuManager.cs" />
