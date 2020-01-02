@@ -18,11 +18,11 @@ public class SpellOrbController : MonoBehaviour
     public GameObject destroyBursts;
 
 
-    Color mainColor;
+    public Color mainColor;
     [SerializeField]
     SpriteRenderer orbBaseSprite;
 
-    void Start()
+    void OnEnable()
     {
         mainColor = orbBaseSprite.color;
     }

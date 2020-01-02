@@ -18,7 +18,7 @@ public class particleController : MonoBehaviour
     bool randomizeColor = false;
     public List<Color> colorsToRandomize = new List<Color>();
 
-
+    
 
     void Start()
     {
@@ -101,5 +101,9 @@ public class particleController : MonoBehaviour
 
         }
 
+    }
+    public void ChangeColor(Color newColor){
+        var main = particles[0].main;
+        main.startColor = newColor;
     }
 }

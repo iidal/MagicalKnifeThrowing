@@ -26,6 +26,11 @@ public class OrbManager : MonoBehaviour
     //orb speed
     float defaultOrbSpeed = 0.5f;
     float orbSpeed;
+
+    //effects for orb spawning
+    [SerializeField]
+    ParticleSystem[] spawningEffects = new ParticleSystem[2];
+
     void Start()
     {
         spawnSpeed = defaultSpawnSpeed;
@@ -56,10 +61,14 @@ public class OrbManager : MonoBehaviour
         int rand = Random.Range(0, orbPrefabs.Length);
         int posRand = Random.Range(0, 2); //which startposition to use
         GameObject go = Instantiate(orbPrefabs[rand], startPositions[posRand].position, Quaternion.identity);
+
         SpellOrbController tempContr =  go.GetComponent<SpellOrbController>();
         tempContr.route = CreateRoutePoints(posRand);
         tempContr.speed = orbSpeed;
         orbs.Add(tempContr);
+
+        spawningEffects[posRand].GetComponent<particleController>().ChangeColor(tempContr.mainColor);
+        spawningEffects[posRand].Play();
 
         //update spawnspeed
         if (spawnSpeed > 0.1f)
