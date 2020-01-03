@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         level = 1;
         orbManager.StartCreatingOrbs();
         PlayerManager.instance.OnGameStart();
+        EnvironmentController.instance.StartLoopingEffects();
         
     }
 
