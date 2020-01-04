@@ -22,10 +22,13 @@ public class StartMenuManager : MonoBehaviour
     }
     IEnumerator Starting()
     {
+        EnvironmentController.instance.AdjustingBGMusic("ExitMenu");
         thisAnimator.Play("FadeStartMenu");
-        yield return new WaitForEndOfFrame();
-        
+
+        yield return new WaitForSeconds(2f);
+        EnvironmentController.instance.LightiningStrike();
         yield return new WaitUntil(() => thisAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default"));
+        EnvironmentController.instance.AdjustingBGMusic("ToGame");
         GameManager.instance.StartGame();
         thisCanvas.enabled = false;
     }

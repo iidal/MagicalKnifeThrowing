@@ -14,8 +14,13 @@ public class ThrowingManager : MonoBehaviour
 
     public delegate void ThrowAndDelete(SpellOrbController o);  //destroying knife and orb when they meet
 
+    AudioSource throwAS;
+    [SerializeField]
+    List<AudioClip> throwSounds = new List<AudioClip>();
+
     void Start(){
         playerAnim = GetComponent<Animator>();
+        throwAS = GetComponent<AudioSource>();
     }
 
     public void ThrowKnife(string icon){
@@ -33,6 +38,8 @@ public class ThrowingManager : MonoBehaviour
                 GameObject k = Instantiate(knife, knifeSpawn.position, Quaternion.identity);
                 k.GetComponent<KnifeController>().StartMove(soc.gameObject.transform, callback, soc);
                 playerAnim.Play("ThrowKnife");
+                throwAS.pitch = Random.Range(0.8f, 1.15f);
+                throwAS.PlayOneShot(throwSounds[Random.Range(0, throwSounds.Count)]);
                 orbManager.orbs.RemoveAt(i);
                 yield return null;
                 break;
