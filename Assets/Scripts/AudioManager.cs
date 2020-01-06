@@ -15,6 +15,8 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource testSource;
 
+    public bool adjustingVolume = false;
+
     void Start()
     {
         if(instance != null){
@@ -30,16 +32,18 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(FadeOutSound(audioSource, fadeSpeed, targetVolume));
     }
     IEnumerator FadeOutSound(AudioSource audioSource, float fadeSpeed, float targetVolume){
-
+        adjustingVolume = true;
         float tempVol = audioSource.volume;
         float ogVol = tempVol;
         float t = 0f;
+        
         while(tempVol>0f){
             tempVol = Mathf.Lerp(ogVol, targetVolume, t);
             t += Time.deltaTime;
             audioSource.volume = tempVol;
             yield return new WaitForSeconds(fadeSpeed);
         }
+        adjustingVolume = false;
         //audioSource.volume = ogVol; // put volume back on so it will play more than once if needed
         
 
@@ -48,6 +52,7 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(FadeInSound(audioSource, fadeSpeed, targetVolume));
     }
     IEnumerator FadeInSound(AudioSource audioSource, float fadeSpeed, float targetVolume){
+        adjustingVolume = true;
         float tempVol = audioSource.volume;
         float t = 0f;
         while(tempVol<targetVolume){
@@ -56,6 +61,7 @@ public class AudioManager : MonoBehaviour
             audioSource.volume = tempVol;
             yield return new WaitForSeconds(fadeSpeed);
         }
+        adjustingVolume = false;
         
 
     }

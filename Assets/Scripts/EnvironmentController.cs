@@ -68,7 +68,7 @@ public class EnvironmentController : MonoBehaviour
     {
         if (adjustment == "Exit")
         {
-            AudioManager.instance.FadeOut(BGmusicSource, 0.01f, 0f);
+            AudioManager.instance.FadeOut(BGmusicSource, 0.005f, 0f);
         }
         else if (adjustment == "ToGame")
         {
@@ -76,9 +76,6 @@ public class EnvironmentController : MonoBehaviour
             BGmusicSource.volume = 0f;
             BGmusicSource.Play();
             AudioManager.instance.FadeIn(BGmusicSource, 0.01f, 0.3f);
-        }
-        else if(adjustment == "ExitGame"){
-            AudioManager.instance.FadeOut(BGmusicSource, 0.01f, 0f);
         }
         else if(adjustment == "ToMenu"){
             BGmusicSource.clip = menuMusicClip;
