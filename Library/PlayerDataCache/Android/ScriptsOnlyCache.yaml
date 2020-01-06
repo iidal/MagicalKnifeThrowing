@@ -20,8 +20,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
@@ -144,7 +146,7 @@ ScriptsOnlyBuild:
     className: TMP_SelectionCaret
   - hash:
       serializedVersion: 2
-      Hash: cb4ddef27215eea75f5082fa8d0c579d
+      Hash: 96816143e8a16d67566f0683f736c620
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: StartMenuManager
@@ -594,7 +596,7 @@ ScriptsOnlyBuild:
     className: SignalAsset
   - hash:
       serializedVersion: 2
-      Hash: 03201a2a20fd484afecd9933c96f0724
+      Hash: 9caa38173fac48792bf51238d37fa4bf
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ThrowingManager
@@ -702,7 +704,7 @@ ScriptsOnlyBuild:
     className: EnvironmentController
   - hash:
       serializedVersion: 2
-      Hash: 5c3b52117d8aebe45c91355061950a81
+      Hash: 9564b23821e034f6fda25eae02d61837
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AudioManager
@@ -853,4 +855,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/MainGame.unity
-  playerPath: C:/Users/Iida/Documents/UNITY/BUILDS/magicalKnifeThrowing/MagicKnives0.0.2.apk
+  playerPath: C:/Users/Iida/Documents/UNITY/BUILDS/magicalKnifeThrowing/MagicKnives0.0.3.apk
