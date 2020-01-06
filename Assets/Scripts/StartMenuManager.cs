@@ -22,14 +22,15 @@ public class StartMenuManager : MonoBehaviour
     }
     IEnumerator Starting()
     {
-        EnvironmentController.instance.AdjustingBGMusic("ExitMenu");
+        EnvironmentController.instance.AdjustingBGMusic("Exit");
         thisAnimator.Play("FadeStartMenu");
 
         yield return new WaitForSeconds(2f);
-        EnvironmentController.instance.LightiningStrike();
+       // EnvironmentController.instance.LightiningStrike(); already happening in normal lightning loop
         yield return new WaitUntil(() => thisAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default"));
         EnvironmentController.instance.AdjustingBGMusic("ToGame");
         GameManager.instance.StartGame();
         thisCanvas.enabled = false;
     }
+
 }

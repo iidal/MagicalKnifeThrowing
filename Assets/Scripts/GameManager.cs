@@ -36,4 +36,13 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void ReturnToMenu(){
+        StartCoroutine("Return");
+    }
+    IEnumerator Return(){
+        EnvironmentController.instance.AdjustingBGMusic("Exit");
+        yield return new WaitForSeconds(2f);
+        EnvironmentController.instance.AdjustingBGMusic("ToMenu");
+    }
+
 }

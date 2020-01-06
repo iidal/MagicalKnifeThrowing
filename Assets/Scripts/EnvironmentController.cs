@@ -35,7 +35,7 @@ public class EnvironmentController : MonoBehaviour
         BGmusicSource = GetComponent<AudioSource>();
         BGmusicSource.clip = menuMusicClip;
         BGmusicSource.volume = 0f;
-        AudioManager.instance.FadeIn(BGmusicSource, 0.05f, 0.4f);
+        AudioManager.instance.FadeIn(BGmusicSource, 0.05f, 0.3f);
         BGmusicSource.Play();
     }
 
@@ -49,9 +49,10 @@ public class EnvironmentController : MonoBehaviour
 
         while (GameManager.instance.isGameOver == false)
         {
-            float randDelay = Random.Range(10f, 30f);
-            yield return new WaitForSeconds(randDelay);
+            
             LightiningStrike();
+            float randDelay = Random.Range(20f, 40f);
+            yield return new WaitForSeconds(randDelay);
         }
     }
     public void LightiningStrike()
@@ -65,7 +66,7 @@ public class EnvironmentController : MonoBehaviour
 
     public void AdjustingBGMusic(string adjustment)
     {
-        if (adjustment == "ExitMenu")
+        if (adjustment == "Exit")
         {
             AudioManager.instance.FadeOut(BGmusicSource, 0.01f, 0f);
         }
