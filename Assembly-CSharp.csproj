@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\OrbRouteManager.cs" />
      <Compile Include="Assets\Scripts\particleController.cs" />
      <Compile Include="Assets\Scripts\PlayerManager.cs" />
+     <Compile Include="Assets\Scripts\SaveLoad.cs" />
      <Compile Include="Assets\Scripts\SpellOrbController.cs" />
      <Compile Include="Assets\Scripts\StartMenuManager.cs" />
      <Compile Include="Assets\Scripts\ThrowingManager.cs" />
