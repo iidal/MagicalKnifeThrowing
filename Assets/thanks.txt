@@ -1,0 +1,8 @@
+Background music:
+Andrew Isaias https://assetstore.unity.com/packages/audio/ambient/fantasy/warped-fantasy-music-pack-49914
+
+add other later
+
+VFX:
+start menu electricity effect
+http://jeanmoreno.com/unity/cartoonfxfree/

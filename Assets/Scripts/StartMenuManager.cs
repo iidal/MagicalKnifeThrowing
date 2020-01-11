@@ -7,15 +7,18 @@ public class StartMenuManager : MonoBehaviour
 {
     [SerializeField]
     Canvas thisCanvas;
-    Animator thisAnimator;
+    [SerializeField]
+    Animator fadeAnimator;
     [SerializeField]
     GameObject beginningBlocker; // jsut a panel that is used to block the game view in the beginning of the game so we can use the same fade animation as everywhere else
     [SerializeField]
     Button startButton;
+    [SerializeField]
+    StartMenuVFX menuEffects;
 
     void Start()
     {
-        thisAnimator = GetComponent<Animator>();
+        
         thisCanvas.enabled = true;
         
         StartCoroutine("AbsoluteBeginningofTheGame");
@@ -34,25 +37,38 @@ public class StartMenuManager : MonoBehaviour
         //audio
         EnvironmentController.instance.AdjustingBGMusic("Exit");
         //animation
-        thisAnimator.Play("FadeStartMenu");
+        fadeAnimator.Play("FadeStartMenu");
+        menuEffects.playParticles = false;
 
         yield return new WaitForEndOfFrame();
-        yield return new WaitUntil(() => thisAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default"));
+        yield return new WaitUntil(() => fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default"));
         
+        fadeAnimator.Play("FadeStartMenuIn"); //doesnt actually fade start menu in just the panel
         //audio back
         EnvironmentController.instance.AdjustingBGMusic("ToGame");
-        //game starts
-        GameManager.instance.StartGame();
-        //
+       
         startButton.enabled = true;
         thisCanvas.enabled = false;
+        yield return new WaitForSeconds(2f);
+        GameManager.instance.StartGame();
+     
+        
+        
     }
+
+    public void BackToMenu(){
+         fadeAnimator.Play("FadeStartMenuIn"); //doesnt actually fade start menu in just the panel
+        thisCanvas.enabled=true;
+        menuEffects.playParticles = true;
+    }
+
+
     IEnumerator AbsoluteBeginningofTheGame()
     {
         startButton.enabled = false;
-        thisAnimator.Play("FadeStartMenuIn");
+        fadeAnimator.Play("FadeStartMenuIn");
         yield return new WaitForEndOfFrame();
-        yield return new WaitUntil(() => thisAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default"));
+        yield return new WaitUntil(() => fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default"));
         yield return new WaitUntil(()=> AudioManager.instance.adjustingVolume == false);
         startButton.enabled = true;
 

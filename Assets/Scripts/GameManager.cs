@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public OrbManager orbManager;
+    public StartMenuManager startMenuMG;
 
     public GameObject endMenu;
     [SerializeField]
@@ -67,6 +68,7 @@ public class GameManager : MonoBehaviour
         EnvironmentController.instance.AdjustingBGMusic("Exit");
         yield return new WaitForSeconds(2f);
         EnvironmentController.instance.AdjustingBGMusic("ToMenu");
+        startMenuMG.BackToMenu();
     }
 
     void LoadGame(){
