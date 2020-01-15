@@ -57,6 +57,7 @@
   <ItemGroup>
      <Compile Include="Assets\PauseManager.cs" />
      <Compile Include="Assets\Scripts\AudioManager.cs" />
+     <Compile Include="Assets\Scripts\CoinManager.cs" />
      <Compile Include="Assets\Scripts\EnvironmentController.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Orbs\OrbManager.cs" />

@@ -42,13 +42,14 @@ public class GameManager : MonoBehaviour
 
         if(score > highScore){
             highScore = score;
-            endText.text = "New high score!"+ score.ToString() + "! Good job b";
+            endText.text = "New high score!"+ score.ToString() + "! Good job b\nget em coins";
             SaveLoad.SaveHighScore(score);
 
         }
         else{
-            endText.text = "You scored " + score.ToString();
+            endText.text = "You scored " + score.ToString() + "\nget em coins";
         }
+        CoinManager.instance.AddCoins(score);
 
     }
 
@@ -60,7 +61,7 @@ public class GameManager : MonoBehaviour
         EnvironmentController.instance.StartLoopingEffects();
         
     }
-
+    #region  back to menu
     public void ReturnToMenu(){
         StartCoroutine("Return");
     }
@@ -70,10 +71,13 @@ public class GameManager : MonoBehaviour
         EnvironmentController.instance.AdjustingBGMusic("ToMenu");
         startMenuMG.BackToMenu();
     }
+    #endregion
 
     void LoadGame(){
         highScore = SaveLoad.LoadHighScore();
-        highScoreTextMenu.text = "high score:\n" + highScore.ToString();
+        highScoreTextMenu.text = highScore.ToString();
+
+        CoinManager.instance.LoadCoins();
     }
 
 }

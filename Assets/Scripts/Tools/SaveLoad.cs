@@ -13,7 +13,7 @@ public static class SaveLoad
 {
     
     public static int highScore = 0; //scores for completed games
-
+    public static int coins = 0;
     
 
     #region high score
@@ -37,6 +37,32 @@ public static class SaveLoad
             file.Close();
 
             return highScore;
+        }
+        return 0;
+    }
+    #endregion
+    #region coins
+  
+    public static void SaveCoins(int coin)
+    {
+        coins = coin;
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/coins.gd");
+        bf.Serialize(file, SaveLoad.coins);
+        file.Close();
+
+    }
+    //loading data from file. rn only loads results from solo games
+    public static int LoadCoins()
+    {
+        if (File.Exists(Application.persistentDataPath + "/coins.gd"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/coins.gd", FileMode.Open);
+            SaveLoad.coins = (int)bf.Deserialize(file);
+            file.Close();
+
+            return coins;
         }
         return 0;
     }
