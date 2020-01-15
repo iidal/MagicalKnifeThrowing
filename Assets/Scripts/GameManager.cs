@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         else{
             instance = this;
         }
-        LoadGame();
+        Invoke("LoadGame", 0.1f);
     }
 
     public void GameOver(){
