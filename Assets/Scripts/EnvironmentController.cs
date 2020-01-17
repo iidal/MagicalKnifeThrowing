@@ -18,7 +18,7 @@ public class EnvironmentController : MonoBehaviour
     ParticleSystem lightningParticle;
     [SerializeField]
     AudioSource lightningAudio;
-    float lightningVolume = 0.27f;
+    float lightningVolume = 0.15f;
 
     void Start()
     {

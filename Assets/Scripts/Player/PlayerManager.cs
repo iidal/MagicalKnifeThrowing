@@ -40,7 +40,7 @@ public class PlayerManager : MonoBehaviour
 
         if(other.tag == "SpellOrb"){
             Debug.Log("game over");
-            GameManager.instance.GameOver();
+            GameManager.instance.EndGameOrAd();
         }
     }
 }
