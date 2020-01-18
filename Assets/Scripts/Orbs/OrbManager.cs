@@ -17,7 +17,7 @@ public class OrbManager : MonoBehaviour
     float middlePointMin;
     float middlePointMax;
     Vector2[] orbColumns = new Vector2[4];  // using vector2 array to save the x coordinate bounds of orb columns
-    
+
 
     [SerializeField]
     Transform[] startPositions;
@@ -27,6 +27,13 @@ public class OrbManager : MonoBehaviour
     //orb speed
     float defaultOrbSpeed = 0.5f;
     float orbSpeed;
+
+    //burst
+    float burstDelay;
+    float burstDelayMin = 10f;
+    float burstDelayMax = 20f;
+    float burstDuration = 1f;
+    bool bursting = false;
 
     //effects for orb spawning
     [SerializeField]
@@ -40,7 +47,7 @@ public class OrbManager : MonoBehaviour
         spawnSpeed = defaultSpawnSpeed;
         orbSpeed = defaultOrbSpeed;
 
-        GetRouteArea();
+        GetRouteArea();     //get size of the screen and divide it to four columns
     }
 
 
@@ -51,6 +58,8 @@ public class OrbManager : MonoBehaviour
 
     IEnumerator Create()
     {
+       
+        StartCoroutine("AdjustSpawnSpeed");
         while (GameManager.instance.isGameOver == false)
         {
             CreateOrb();
@@ -68,28 +77,87 @@ public class OrbManager : MonoBehaviour
         //int posRand = Random.Range(0, 2); //which startposition to use
         GameObject go = Instantiate(orbPrefabs[rand], startPositions[rand].position, Quaternion.identity);
 
-        SpellOrbController tempContr =  go.GetComponent<SpellOrbController>();
+        SpellOrbController tempContr = go.GetComponent<SpellOrbController>();
         tempContr.route = CreateRoutePoints(rand);
         tempContr.speed = orbSpeed;
         orbs.Add(tempContr);
 
         int tempRand = 0;   //two particle effects for each side, which in turn have 2 spawn positions so first 2 have particle 0 and next 2 particle 1
-        if(rand >1){
+        if (rand > 1)
+        {
             tempRand = 1;
-        }           
+        }
         spawningEffects[tempRand].GetComponent<particleController>().ChangeColor(tempContr.mainColor);
         spawningEffects[tempRand].Play();
 
-        //update spawnspeed
-        if (spawnSpeed > 0.1f)
+
+        AdjustSpawnSpeed();
+
+        if (orbSpeed < 3f)
         {
-            float decrease = ((float)GameManager.instance.level * 5) / 100;
-            spawnSpeed = defaultSpawnSpeed - decrease;
+            float increase = ((float)GameManager.instance.level * 4) / 100;
+            orbSpeed = defaultOrbSpeed + increase;
         }
-        if(orbSpeed<3f){
-            float increase = ((float)GameManager.instance.level * 2) / 100;
-            orbSpeed = defaultOrbSpeed+ increase;
+
+    }
+
+    IEnumerator AdjustSpawnSpeed()
+    {
+        burstDelay = Random.Range(burstDelayMin, burstDelayMax);
+        while (GameManager.instance.isGameOver == false)
+        {
+            burstDelay -= Time.deltaTime;
+            if (burstDelay < 0 && !bursting)
+            {
+                Debug.Log("BURST LEVEL IS OVER 9000");
+                bursting = true;
+                spawnSpeed = 0.5f;
+            }
+            if (bursting)
+            {
+                burstDuration -= Time.deltaTime;
+                if (burstDuration < 0)
+                {
+                    bursting = false;
+                    burstDelay = Random.Range(burstDelayMin, burstDelayMax);
+                    burstDuration = 1f;
+                }
+            }
+
+
+
+
+            if (!bursting)
+            {
+
+                //update spawnspeed
+                if (spawnSpeed > 0.05f)
+                {
+                    float decrease = ((float)GameManager.instance.level * 8) / 100;
+                    spawnSpeed = defaultSpawnSpeed - decrease;
+                }
+
+
+            }
+            yield return new WaitForEndOfFrame();
         }
+    }
+
+
+
+
+
+    public void DestroyOrbs()
+    {
+
+        foreach (SpellOrbController soc in orbs)
+        {
+
+            soc.DestroyOrb();
+
+
+        }
+        orbs = new List<SpellOrbController>();
     }
 
 
@@ -121,8 +189,8 @@ public class OrbManager : MonoBehaviour
         return points;
 
     }
-
-    void GetRouteArea(){
+    void GetRouteArea()
+    {
         Vector3 p = cam.ViewportToWorldPoint(new Vector3(1, 0, cam.nearClipPlane));
         middlePointMax = p.x;
         p = cam.ViewportToWorldPoint(new Vector3(0, 0, cam.nearClipPlane));
@@ -131,29 +199,16 @@ public class OrbManager : MonoBehaviour
         float columnWidth;
         float xArea;
         xArea = middlePointMax - middlePointMin;
-        columnWidth = xArea/4;
+        columnWidth = xArea / 4;
         //1st column
         orbColumns[0] = new Vector2(middlePointMin, middlePointMin + columnWidth);
         //2nd column
-        orbColumns[1] = new Vector2(middlePointMin + columnWidth, middlePointMin + columnWidth*2);
+        orbColumns[1] = new Vector2(middlePointMin + columnWidth, middlePointMin + columnWidth * 2);
         //3rd column
-        orbColumns[2] = new Vector2(middlePointMin + columnWidth*2, middlePointMin + columnWidth*3);
+        orbColumns[2] = new Vector2(middlePointMin + columnWidth * 2, middlePointMin + columnWidth * 3);
         //4th column
-        orbColumns[3] = new Vector2(middlePointMin + columnWidth*3, middlePointMax);
+        orbColumns[3] = new Vector2(middlePointMin + columnWidth * 3, middlePointMax);
 
     }
 
-
-    public void DestroyOrbs()
-    {
-
-        foreach (SpellOrbController soc in orbs)
-        {
-
-            soc.DestroyOrb();
-
-
-        }
-        orbs = new List<SpellOrbController>();
-    }
 }
