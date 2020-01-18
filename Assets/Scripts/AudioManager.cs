@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     Sprite audioOnIcon;
     [SerializeField]
     Image audioIcon, inGameAudioIcon;
-    bool audioOn = true;
+    public bool audioOn = true;
 
 
     // all audiosources need to be referenced in these lists so they can be all disabled and enabled when audio is toggled
@@ -82,24 +82,16 @@ public class AudioManager : MonoBehaviour
             audioIcon.sprite = audioOffIcon;
             inGameAudioIcon.sprite = audioOffIcon;
             AudioListener.volume = 0;
-            // foreach(AudioSource ac in effectAudioSources){
-            //     ac.enabled = false;
-            // }
-            // foreach(AudioSource ac in musicAudioSources){
-            //     ac.enabled = false;
-            // }
+            SettingsManager.instance.SaveAudioSettings(false);
+
         }
         else if(!audioOn){
             audioOn = true;
             audioIcon.sprite = audioOnIcon;
             inGameAudioIcon.sprite = audioOnIcon;
             AudioListener.volume = 1;
-            // foreach(AudioSource ac in effectAudioSources){
-            //     ac.enabled = true;
-            // }
-            // foreach(AudioSource ac in musicAudioSources){
-            //     ac.enabled = true;
-            //}
+            SettingsManager.instance.SaveAudioSettings(true);
+
         }
 
     }
