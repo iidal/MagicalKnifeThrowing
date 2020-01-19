@@ -42,12 +42,31 @@ public class OrbManager : MonoBehaviour
 
     public Camera cam;
 
+    bool testBool = false;
+
+    [SerializeField] Animator enemyAnim;
+
     void Start()
     {
         spawnSpeed = defaultSpawnSpeed;
         orbSpeed = defaultOrbSpeed;
 
         GetRouteArea();     //get size of the screen and divide it to four columns
+    }
+
+
+    void Update(){
+        if(Input.GetKeyUp(KeyCode.Space)){
+            Debug.Log("sss");
+            if(testBool){
+                enemyAnim.SetBool("bursting",false);
+                testBool = false;
+            }
+            else{
+                enemyAnim.SetBool("bursting", true);
+                testBool = true;
+            }
+        }
     }
 
 
@@ -110,8 +129,10 @@ public class OrbManager : MonoBehaviour
             if (burstDelay < 0 && !bursting)
             {
                 Debug.Log("BURST LEVEL IS OVER 9000");
+                enemyAnim.SetBool("bursting", true);
+                yield return new WaitForSeconds(1.5f);
                 bursting = true;
-                spawnSpeed = 0.5f;
+                spawnSpeed = 0.3f;
             }
             if (bursting)
             {
@@ -120,7 +141,8 @@ public class OrbManager : MonoBehaviour
                 {
                     bursting = false;
                     burstDelay = Random.Range(burstDelayMin, burstDelayMax);
-                    burstDuration = 1f;
+                    burstDuration = 2f;
+                    enemyAnim.SetBool("bursting", false);
                 }
             }
 
