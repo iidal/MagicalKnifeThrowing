@@ -14,10 +14,8 @@ public class EnvironmentController : MonoBehaviour
 
 
     //LIGHTNING STRIKE
-    [SerializeField]
-    ParticleSystem lightningParticle;
-    [SerializeField]
-    AudioSource lightningAudio;
+    [SerializeField] ParticleSystem lightningParticle;
+    [SerializeField] AudioSource lightningAudio;
     float lightningVolume = 0.15f;
 
     void Start()
@@ -41,7 +39,10 @@ public class EnvironmentController : MonoBehaviour
 
     public void StartLoopingEffects()
     {
+
+
         StartCoroutine("RandomLightning");
+
     }
 
     IEnumerator RandomLightning()
@@ -49,7 +50,7 @@ public class EnvironmentController : MonoBehaviour
 
         while (GameManager.instance.isGameOver == false)
         {
-            
+
             LightiningStrike();
             float randDelay = Random.Range(20f, 40f);
             yield return new WaitForSeconds(randDelay);
@@ -77,7 +78,8 @@ public class EnvironmentController : MonoBehaviour
             BGmusicSource.Play();
             AudioManager.instance.FadeIn(BGmusicSource, 0.01f, 0.3f);
         }
-        else if(adjustment == "ToMenu"){
+        else if (adjustment == "ToMenu")
+        {
             BGmusicSource.clip = menuMusicClip;
             BGmusicSource.volume = 0f;
             BGmusicSource.Play();

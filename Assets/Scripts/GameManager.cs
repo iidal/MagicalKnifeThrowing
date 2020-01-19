@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
             highScore = score;
             endText.text = "New high score!" + score.ToString() + "! Good job b\nget em coins";
             SaveLoad.SaveHighScore(score);
+            startMenuMG.UpdateHighScore(score);
 
         }
         else

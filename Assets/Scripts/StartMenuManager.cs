@@ -2,23 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class StartMenuManager : MonoBehaviour
 {
-    [SerializeField]
-    Canvas thisCanvas;
+    [SerializeField] Canvas thisCanvas;
     Animator startPanelAnimator;
-    [SerializeField]
-    Animator fadeAnimator;
+    [SerializeField] Animator fadeAnimator;
 
-    [SerializeField]
-    Button startButton;
-    [SerializeField]
-    StartMenuVFX menuEffects;
+    [SerializeField] Button startButton;
+    [SerializeField] StartMenuVFX menuEffects;
 
-    [SerializeField]
-    GameObject[] otherPanels;   // panels in start menu other than the first
+    [SerializeField] GameObject[] otherPanels;   // panels in start menu other than the first
     GameObject currentPanel; //panel currently showing
+
+    [SerializeField] TextMeshProUGUI highScoreText;
 
     void Start()
     {
@@ -80,6 +78,10 @@ public class StartMenuManager : MonoBehaviour
         yield return new WaitUntil(() => AudioManager.instance.adjustingVolume == false);
         startButton.enabled = true;
 
+    }
+
+    public void UpdateHighScore(int score){
+        highScoreText.text = score.ToString();
     }
 
     #region start menu panel switch
