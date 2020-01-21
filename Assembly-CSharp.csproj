@@ -60,12 +60,15 @@
      <Compile Include="Assets\Scripts\CoinManager.cs" />
      <Compile Include="Assets\Scripts\EnvironmentController.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Items\ItemButtonMenuController.cs" />
+     <Compile Include="Assets\Scripts\Items\ItemManager.cs" />
      <Compile Include="Assets\Scripts\Orbs\OrbManager.cs" />
      <Compile Include="Assets\Scripts\Orbs\OrbRouteManager.cs" />
      <Compile Include="Assets\Scripts\Orbs\SpellOrbController.cs" />
      <Compile Include="Assets\Scripts\Player\KnifeController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\Player\ThrowingManager.cs" />
+     <Compile Include="Assets\Scripts\SpellItem.cs" />
      <Compile Include="Assets\Scripts\StartMenuManager.cs" />
      <Compile Include="Assets\Scripts\StartMenuVFX.cs" />
      <Compile Include="Assets\Scripts\Tools\particleController.cs" />
