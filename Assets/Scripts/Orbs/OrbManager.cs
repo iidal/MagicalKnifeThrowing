@@ -5,6 +5,8 @@ using UnityEngine;
 public class OrbManager : MonoBehaviour
 {
 
+    public static OrbManager instance;
+
     public GameObject[] orbPrefabs;
 
     public List<SpellOrbController> orbs = new List<SpellOrbController>();
@@ -48,6 +50,15 @@ public class OrbManager : MonoBehaviour
 
     void Start()
     {
+
+        if(instance != null){
+            Destroy(this);
+        }
+        else{
+            instance = this;
+        }
+
+
         spawnSpeed = defaultSpawnSpeed;
         orbSpeed = defaultOrbSpeed;
 

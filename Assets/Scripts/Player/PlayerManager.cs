@@ -43,4 +43,24 @@ public class PlayerManager : MonoBehaviour
             GameManager.instance.EndGameOrAd();
         }
     }
+
+
+    #region ITEMS
+
+    public void TimeItem(){
+        StartCoroutine("SlowDownTime");
+    }
+    IEnumerator SlowDownTime(){
+        Time.timeScale = 0.5f;
+        Debug.Log("slow down");
+        yield return new WaitForSeconds(2f);
+        Time.timeScale = 1f;
+        Debug.Log("normal");
+    }
+    public void DestroyItem(){
+        OrbManager.instance.DestroyOrbs();
+    }
+
+
+    #endregion
 }
