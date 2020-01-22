@@ -11,4 +11,5 @@ public class SpellItem : ScriptableObject
     public Color itemBackgroundColor;
     public Sprite itemIcon;
 
+
 }

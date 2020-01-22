@@ -47,8 +47,18 @@ public class PlayerManager : MonoBehaviour
 
     #region ITEMS
 
-    public void TimeItem(){
-        StartCoroutine("SlowDownTime");
+    public void UseItem(string itemName){
+        switch(itemName){
+            case "SlowTime":
+            StartCoroutine("SlowDownTime");
+                break;
+            case "DestroyOrbs":
+                DestroyItem();
+                break;
+            default:
+                break;
+        }
+
     }
     IEnumerator SlowDownTime(){
         Time.timeScale = 0.5f;

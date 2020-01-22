@@ -67,17 +67,17 @@ public class OrbManager : MonoBehaviour
 
 
     void Update(){
-        if(Input.GetKeyUp(KeyCode.Space)){
-            Debug.Log("sss");
-            if(testBool){
-                enemyAnim.SetBool("bursting",false);
-                testBool = false;
-            }
-            else{
-                enemyAnim.SetBool("bursting", true);
-                testBool = true;
-            }
-        }
+        // if(Input.GetKeyUp(KeyCode.Space)){
+        //     Debug.Log("sss");
+        //     if(testBool){
+        //         enemyAnim.SetBool("bursting",false);
+        //         testBool = false;
+        //     }
+        //     else{
+        //         enemyAnim.SetBool("bursting", true);
+        //         testBool = true;
+        //     }
+        // }
     }
 
 
@@ -88,7 +88,7 @@ public class OrbManager : MonoBehaviour
 
     IEnumerator Create()
     {
-       
+       Debug.Log("spawning start");
         StartCoroutine("AdjustSpawnSpeed");
         while (GameManager.instance.isGameOver == false)
         {
@@ -99,6 +99,7 @@ public class OrbManager : MonoBehaviour
 
 
         }
+        Debug.Log("stopped spawning");
     }
 
     void CreateOrb()

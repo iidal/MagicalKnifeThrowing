@@ -7,11 +7,13 @@ using TMPro;
 public class ItemButtonMenuController : MonoBehaviour
 {
     
-    [HideInInspector] public bool itemSelected = false;
-    Image itemIcon;
-    TextMeshProUGUI amountText;
-    GameObject selectionMark;
-    Image buttonBase;
+    public bool itemSelected = false;
+    public Image itemIcon;
+    public TextMeshProUGUI amountText;
+    public GameObject selectionMark;
+    public Image buttonBase;
+    public SpellItem spell;
+  
 
     void Start()
     {
@@ -41,8 +43,14 @@ public class ItemButtonMenuController : MonoBehaviour
         }
     }
 
-    public void PopulateButton(Sprite icon, Color buttonColor){
-        itemIcon.sprite = icon;
-        buttonBase.color = buttonColor;
+    public void PopulateButton(SpellItem spellOb){
+        spell = spellOb;
+        itemIcon.sprite = spell.itemIcon;
+        buttonBase.color = spell.itemBackgroundColor;
+
+        
+        
+        
+        
     }
 }
