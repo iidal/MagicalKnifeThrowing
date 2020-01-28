@@ -14,6 +14,8 @@ public static class SaveLoad
     
     public static int highScore = 0; //scores for completed games
     public static int coins = 0;
+
+    public static SavedItems itemAmounts;
     
 
     #region high score
@@ -67,6 +69,33 @@ public static class SaveLoad
         return 0;
     }
     #endregion
+    #region items
+
+    public static void SaveItems(int time, int destroy){
+        itemAmounts = new SavedItems(time, destroy);
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/items.gd");
+        bf.Serialize(file, SaveLoad.itemAmounts);
+        file.Close();
+
+    }
+    public static SavedItems LoadItems(){
+        if (File.Exists(Application.persistentDataPath + "/items.gd"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/items.gd", FileMode.Open);
+            SaveLoad.itemAmounts = (SavedItems)bf.Deserialize(file);
+            file.Close();
+
+            return itemAmounts;
+        }
+        return new SavedItems(0,0);
+    }
+
+    #endregion
+    
+    
+    
     // public static void DeleteFile(string toDelete)
     // {
     //     if(toDelete=="gameState"){

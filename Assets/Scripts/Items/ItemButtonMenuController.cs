@@ -9,11 +9,14 @@ public class ItemButtonMenuController : MonoBehaviour
     
     public bool itemSelected = false;
     public Image itemIcon;
+    
     public TextMeshProUGUI amountText;
     public GameObject selectionMark;
     public Image buttonBase;
     public SpellItem spell;
   
+    int amount;
+    public string spellName;
 
     void Start()
     {
@@ -43,14 +46,23 @@ public class ItemButtonMenuController : MonoBehaviour
         }
     }
 
-    public void PopulateButton(SpellItem spellOb){
+    public void PopulateButton(SpellItem spellOb, SavedItems itemamount){
         spell = spellOb;
         itemIcon.sprite = spell.itemIcon;
         buttonBase.color = spell.itemBackgroundColor;
 
+        if(spell.itemName == "SlowTime"){
+            amount = itemamount.timeAmount;
+        }
+        else if (spell.itemName == "DestroyOrbs"){
+            amount = itemamount.destroyAmount;
+        }
+        amountText.text = amount.ToString();
+        spellName = spell.itemName;
         
-        
-        
-        
+
+    }
+    public void UpdateAmount(int amount){
+        amountText.text = amount.ToString();
     }
 }
