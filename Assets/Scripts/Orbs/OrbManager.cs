@@ -35,7 +35,7 @@ public class OrbManager : MonoBehaviour
     float burstDelayMin = 10f;
     float burstDelayMax = 20f;
     float burstDuration = 1f;
-    bool bursting = false;
+    public bool bursting = false;
 
     //effects for orb spawning
     [SerializeField]
@@ -88,8 +88,10 @@ public class OrbManager : MonoBehaviour
 
     IEnumerator Create()
     {
-       Debug.Log("spawning start");
+
         StartCoroutine("AdjustSpawnSpeed");
+
+
         while (GameManager.instance.isGameOver == false)
         {
             CreateOrb();
@@ -99,7 +101,7 @@ public class OrbManager : MonoBehaviour
 
 
         }
-        Debug.Log("stopped spawning");
+
     }
 
     void CreateOrb()
@@ -122,7 +124,7 @@ public class OrbManager : MonoBehaviour
         spawningEffects[tempRand].Play();
 
 
-        AdjustSpawnSpeed();
+        //AdjustSpawnSpeed();
 
         if (orbSpeed < 3f)
         {
@@ -135,6 +137,8 @@ public class OrbManager : MonoBehaviour
     IEnumerator AdjustSpawnSpeed()
     {
         burstDelay = Random.Range(burstDelayMin, burstDelayMax);
+
+
         while (GameManager.instance.isGameOver == false)
         {
             burstDelay -= Time.deltaTime;
@@ -175,6 +179,9 @@ public class OrbManager : MonoBehaviour
             }
             yield return new WaitForEndOfFrame();
         }
+        enemyAnim.SetBool("bursting", false);
+        burstDelay = Random.Range(burstDelayMin, burstDelayMax);
+        bursting = false;
     }
 
 
