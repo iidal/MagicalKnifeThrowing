@@ -15,4 +15,5 @@ MonoBehaviour:
   itemName: SlowTime
   itemDescription: Slow down time
   itemBackgroundColor: {r: 0.8867924, g: 0.31372374, b: 0.31372374, a: 1}
-  itemIcon: {fileID: 21300000, guid: 27e94b786459fad4ab4b2ae347a16d48, type: 3}
+  itemIcon: {fileID: 4449396732874096405, guid: 5d3253e752bb43844a0faacfc0ea2720,
+    type: 3}
