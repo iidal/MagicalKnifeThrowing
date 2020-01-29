@@ -11,17 +11,18 @@ public class StartMenuVFX : MonoBehaviour
     ParticleSystem logoEffect;
     [SerializeField]
     Transform[] logoEffectPositions; //play particle on different points on logo
+    [SerializeField]ParticleSystem[] bottleEffects;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine("ParticlesOnLogo");
+        //StartCoroutine("ParticlesOnLogo");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+    
     }
 
     IEnumerator ParticlesOnLogo(){
@@ -33,5 +34,17 @@ public class StartMenuVFX : MonoBehaviour
             logoEffect.transform.position = logoEffectPositions[Random.Range(0, logoEffectPositions.Length-1)].position;
         }
 
+    }
+    public void TurnOnOff(bool on){
+        if(on){
+            foreach(ParticleSystem ps in bottleEffects){
+                ps.Play();
+            }
+        }
+        else{
+            foreach(ParticleSystem ps in bottleEffects){
+                ps.Stop();
+            }
+        }
     }
 }

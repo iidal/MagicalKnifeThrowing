@@ -43,7 +43,9 @@ public class StartMenuManager : MonoBehaviour
         EnvironmentController.instance.AdjustingBGMusic("Exit");
         //animation
         fadeAnimator.Play("FadeStartMenu");
+
         menuEffects.playParticles = false;
+        menuEffects.TurnOnOff(false);
 
         yield return new WaitForEndOfFrame();
         yield return new WaitUntil(() => fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default"));
@@ -66,6 +68,7 @@ public class StartMenuManager : MonoBehaviour
         fadeAnimator.Play("FadeStartMenuIn"); //doesnt actually fade start menu in just the panel
         thisCanvas.enabled = true;
         menuEffects.playParticles = true;
+        menuEffects.TurnOnOff(true);
     }
 
 

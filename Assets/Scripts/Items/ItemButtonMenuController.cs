@@ -12,14 +12,17 @@ public class ItemButtonMenuController : MonoBehaviour
     
     public TextMeshProUGUI amountText;
     public GameObject selectionMark;
-    public Image buttonBase;
+    //public Image buttonBase;
+    public ParticleSystem[] bottleParticles;
     public SpellItem spell;
+
   
     int amount;
     public string spellName;
 
     void Start()
     {
+        
         GameObject tempOb = transform.Find("ItemIcon").gameObject;
         //item icon
         itemIcon = tempOb.GetComponent<Image>();
@@ -30,7 +33,12 @@ public class ItemButtonMenuController : MonoBehaviour
         selectionMark = transform.Find("CheckMark").gameObject;
         selectionMark.SetActive(false);
         //button base on start menu
-        buttonBase = GetComponent<Image>();
+        //buttonBase = GetComponent<Image>();
+
+        bottleParticles = new ParticleSystem[2];
+        tempOb = transform.Find("BottleParticles").gameObject;
+        //bottleParticles[0] = tempOb.GetComponent<ParticleSystem>();
+        bottleParticles = tempOb.GetComponentsInChildren<ParticleSystem>();
         
 
     }
@@ -49,7 +57,7 @@ public class ItemButtonMenuController : MonoBehaviour
     public void PopulateButton(SpellItem spellOb, SavedItems itemamount){
         spell = spellOb;
         itemIcon.sprite = spell.itemIcon;
-        buttonBase.color = spell.itemBackgroundColor;
+        //buttonBase.color = spell.itemBackgroundColor;
 
         if(spell.itemName == "SlowTime"){
             amount = itemamount.timeAmount;
@@ -59,6 +67,12 @@ public class ItemButtonMenuController : MonoBehaviour
         }
         amountText.text = amount.ToString();
         spellName = spell.itemName;
+
+        foreach(ParticleSystem ps in bottleParticles){
+            var main = ps.main;
+            Color temp = spell.itemBackgroundColor;
+            main.startColor = temp;
+        }
         
 
     }

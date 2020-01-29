@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: DestroyOrbs
   itemDescription: Destroy all orbs on the game view
-  itemBackgroundColor: {r: 0.28835887, g: 0.59362495, b: 0.754717, a: 1}
+  itemBackgroundColor: {r: 0.7176471, g: 0.2509804, b: 0.8431373, a: 1}
   itemIcon: {fileID: -5424722925785441179, guid: 5d3253e752bb43844a0faacfc0ea2720,
     type: 3}

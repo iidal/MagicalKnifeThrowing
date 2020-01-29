@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: SlowTime
   itemDescription: Slow down time
-  itemBackgroundColor: {r: 0.8867924, g: 0.31372374, b: 0.31372374, a: 1}
+  itemBackgroundColor: {r: 0.34117648, g: 0.7019608, b: 0.8352942, a: 1}
   itemIcon: {fileID: 4449396732874096405, guid: 5d3253e752bb43844a0faacfc0ea2720,
     type: 3}
