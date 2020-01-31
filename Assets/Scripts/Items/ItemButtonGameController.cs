@@ -32,7 +32,7 @@ public class ItemButtonGameController : MonoBehaviour
         bottleParticles = temp.GetComponentsInChildren<ParticleSystem>();
     }
 
-    public void PopulateButton(SpellItem spell){
+    public void PopulateButton(SpellItem spell){    //preparing button to be used in game
         gameObject.SetActive(true);
         thisItemButton.interactable = true;
         itemName = spell.itemName;
@@ -48,13 +48,16 @@ public class ItemButtonGameController : MonoBehaviour
 
         buttonUsed = true;
     }
-    public void UseItem(){
+    public void UseItem(){  //using in game
         thisItemButton.interactable = false;
-        PlayerManager.instance.UseItem(itemName);
+        ItemManager.instance.UseItem(itemName);
+        
         
 
-
         buttonUsed = false;
+
+
+        gameObject.SetActive(false); //switch to animation at some point
     }
 
  

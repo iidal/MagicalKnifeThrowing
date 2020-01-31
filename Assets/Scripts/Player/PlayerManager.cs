@@ -45,32 +45,5 @@ public class PlayerManager : MonoBehaviour
     }
 
 
-    #region ITEMS
-
-    public void UseItem(string itemName){
-        switch(itemName){
-            case "SlowTime":
-            StartCoroutine("SlowDownTime");
-                break;
-            case "DestroyOrbs":
-                DestroyItem();
-                break;
-            default:
-                break;
-        }
-
-    }
-    IEnumerator SlowDownTime(){
-        Time.timeScale = 0.5f;
-        Debug.Log("slow down");
-        yield return new WaitForSeconds(2f);
-        Time.timeScale = 1f;
-        Debug.Log("normal");
-    }
-    public void DestroyItem(){
-        OrbManager.instance.DestroyOrbs();
-    }
-
-
-    #endregion
+    
 }

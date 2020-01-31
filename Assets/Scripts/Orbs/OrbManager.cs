@@ -190,7 +190,7 @@ public class OrbManager : MonoBehaviour
 
     public void DestroyOrbs()
     {
-
+       
         foreach (SpellOrbController soc in orbs)
         {
 
@@ -198,6 +198,7 @@ public class OrbManager : MonoBehaviour
 
 
         }
+        
         orbs = new List<SpellOrbController>();
     }
 

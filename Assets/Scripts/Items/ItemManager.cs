@@ -4,7 +4,8 @@ using UnityEngine;
 using System;
 public class ItemManager : MonoBehaviour
 {
-    
+    public static ItemManager instance;
+
     [SerializeField] ItemButtonMenuController[] buttons;    //start menu buttons
     public SpellItem[] spellItems;
 
@@ -16,6 +17,15 @@ public class ItemManager : MonoBehaviour
     void Start()
     {
 
+        if(instance != null){
+            Destroy(this);
+        }
+        else{
+            instance = this;
+        }
+
+
+        SaveLoad.SaveItems(1, 5);
         LoadingItems();
         Invoke("PopulateButtons", 0.1f);
 
@@ -45,6 +55,7 @@ public class ItemManager : MonoBehaviour
             if(but.itemSelected){
                 gameButtons[i].PopulateButton(but.spell);
                 UseItem(but.spellName, but);
+                but.itemSelected = false;
             }
             i++;
         }
@@ -75,6 +86,34 @@ public class ItemManager : MonoBehaviour
         SavingItems();
         
     }
+
+    
+    //using items in game in game
+    public void UseItem(string itemName){
+        switch(itemName){
+            case "SlowTime":
+            StartCoroutine("SlowDownTime");
+                break;
+            case "DestroyOrbs":
+                DestroyItem();
+                break;
+            default:
+                break;
+        }
+
+    }
+    IEnumerator SlowDownTime(){
+        Time.timeScale = 0.5f;
+        Debug.Log("slow down");
+        yield return new WaitForSeconds(2f);
+        Time.timeScale = 1f;
+        Debug.Log("normal");
+    }
+    public void DestroyItem(){
+        OrbManager.instance.DestroyOrbs();
+    }
+
+
 
 
 
