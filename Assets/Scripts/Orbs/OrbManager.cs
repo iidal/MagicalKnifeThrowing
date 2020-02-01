@@ -146,7 +146,7 @@ public class OrbManager : MonoBehaviour
             {
                 Debug.Log("BURST LEVEL IS OVER 9000");
                 enemyAnim.SetBool("bursting", true);
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(.5f);
                 bursting = true;
                 spawnSpeed = 0.3f;
             }

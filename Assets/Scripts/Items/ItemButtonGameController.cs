@@ -12,8 +12,8 @@ public class ItemButtonGameController : MonoBehaviour
     bool itemUsed = false;  //one certain item per match so this goes to true when item has been used
     public bool buttonUsed = false;    //is the button populated with an item
     
-    public ParticleSystem[] bottleParticles;
-
+    ParticleSystem[] bottleParticles;
+    Animator buttonAnim;
 
 
     void Start()
@@ -30,6 +30,7 @@ public class ItemButtonGameController : MonoBehaviour
         temp = transform.Find("BottleParticles").gameObject;
         //bottleParticles[0] = tempOb.GetComponent<ParticleSystem>();
         bottleParticles = temp.GetComponentsInChildren<ParticleSystem>();
+        buttonAnim = GetComponent<Animator>();
     }
 
     public void PopulateButton(SpellItem spell){    //preparing button to be used in game
@@ -50,14 +51,14 @@ public class ItemButtonGameController : MonoBehaviour
     }
     public void UseItem(){  //using in game
         thisItemButton.interactable = false;
-        ItemManager.instance.UseItem(itemName);
+        ItemManager.instance.UseItem(itemName, buttonAnim, this.gameObject);
         
         
 
         buttonUsed = false;
 
 
-        gameObject.SetActive(false); //switch to animation at some point
+        //gameObject.SetActive(false); //switch to animation at some point
     }
 
  

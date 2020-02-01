@@ -89,28 +89,35 @@ public class ItemManager : MonoBehaviour
 
     
     //using items in game in game
-    public void UseItem(string itemName){
+    public void UseItem(string itemName, Animator anim, GameObject go){
         switch(itemName){
             case "SlowTime":
-            StartCoroutine("SlowDownTime");
+            StartCoroutine(SlowDownTime(anim, go));
                 break;
             case "DestroyOrbs":
-                DestroyItem();
+                StartCoroutine(DestroyItem(anim, go));
                 break;
             default:
                 break;
         }
 
     }
-    IEnumerator SlowDownTime(){
+    IEnumerator SlowDownTime(Animator anim, GameObject go){
         Time.timeScale = 0.5f;
-        Debug.Log("slow down");
+        anim.Play("circleExpand");
+
         yield return new WaitForSeconds(2f);
         Time.timeScale = 1f;
-        Debug.Log("normal");
+        anim.Play("circleShrink");
+        yield return new WaitForSeconds(0.5f);
+        go.SetActive(false);    //anim at some point with the same animator
     }
-    public void DestroyItem(){
+    IEnumerator DestroyItem(Animator anim, GameObject go){
+        anim.Play("circleExpand");
+        yield return new WaitForSeconds(0.2f);
         OrbManager.instance.DestroyOrbs();
+        yield return new WaitForSeconds(0.2f);
+        go.SetActive(false);    //anim at some point with the same animator
     }
 
 
