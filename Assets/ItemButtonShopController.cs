@@ -6,16 +6,20 @@ using UnityEngine.UI;
 public class ItemButtonShopController : MonoBehaviour
 {
     [SerializeField] SpellItem spell;
-    Image itemIcon;
+    public Image itemIcon;
+    public Button buyButton;
     string itemName;
     int itemPrice;
     [SerializeField] ItemButtonMenuController[] menuButtons;
+
 
     void Start()
     {
         GameObject tempOb = transform.Find("ItemIcon").gameObject;
         //item icon
         itemIcon = tempOb.GetComponent<Image>();
+        tempOb = transform.GetChild(1).gameObject;  //idk why using find didnt workd
+        buyButton =  tempOb.GetComponent<Button>();
         PopulateButton();
     }
 
@@ -29,7 +33,7 @@ public class ItemButtonShopController : MonoBehaviour
     public void BuyItem()
     {
         int coins = CoinManager.instance.CheckCoinAmount();
-        if (coins > itemPrice)
+        if (coins >= itemPrice)
         {
             foreach (ItemButtonMenuController itembutton in menuButtons)
             {
@@ -37,9 +41,23 @@ public class ItemButtonShopController : MonoBehaviour
                 {
                     ItemManager.instance.AddingItems(itemName);
                     CoinManager.instance.UseCoins(itemPrice);
+                    
+                    //coins = CoinManager.instance.CheckCoinAmount();
+                    //if(coins< itemPrice){
+                    //    buyButton.interactable = false;
+                    //}
                 }
 
             }
+        }
+    }
+    public void CoinUpdate(int coins){
+        Debug.Log("coun update");
+        if(coins>= itemPrice){
+            buyButton.interactable = true;
+        }
+        else{
+            buyButton.interactable = false;
         }
     }
 }

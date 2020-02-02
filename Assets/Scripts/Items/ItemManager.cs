@@ -10,6 +10,7 @@ public class ItemManager : MonoBehaviour
     public SpellItem[] spellItems;
 
     [SerializeField] ItemButtonGameController[] gameButtons;
+    public ItemButtonShopController[] shopButtons;
 
     SavedItems itemsInventory;
 
@@ -98,7 +99,7 @@ public class ItemManager : MonoBehaviour
 
     }
 
-        #region using items in game
+    #region using items in game
     //using items in game in game
     public void UseItem(string itemName, Animator anim, GameObject go)
     {
@@ -132,6 +133,7 @@ public class ItemManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         OrbManager.instance.DestroyOrbs();
         yield return new WaitForSeconds(0.2f);
+        anim.Play("Default");
         go.SetActive(false);    //anim at some point with the same animator
     }
 

@@ -25,10 +25,7 @@ public class StartMenuManager : MonoBehaviour
 
         StartCoroutine("AbsoluteBeginningofTheGame");
 
-        foreach (GameObject go in otherPanels)
-        {
-            go.SetActive(false);
-        }
+
     }
 
 
@@ -81,6 +78,11 @@ public class StartMenuManager : MonoBehaviour
         yield return new WaitUntil(() => fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default"));
         yield return new WaitUntil(() => AudioManager.instance.adjustingVolume == false);
         startButton.enabled = true;
+
+        foreach (GameObject go in otherPanels)
+        {
+            go.SetActive(false);
+        }
 
     }
 
