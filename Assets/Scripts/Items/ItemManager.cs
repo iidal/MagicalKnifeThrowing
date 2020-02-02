@@ -17,82 +17,95 @@ public class ItemManager : MonoBehaviour
     void Start()
     {
 
-        if(instance != null){
+        if (instance != null)
+        {
             Destroy(this);
         }
-        else{
+        else
+        {
             instance = this;
         }
-
-
-        SaveLoad.SaveItems(1, 5);
-        LoadingItems();
+          LoadingItems();
         Invoke("PopulateButtons", 0.1f);
 
-
+      
 
     }
-    void PopulateButtons(){
-        for(int i = 0; i<buttons.Length; i++){
+    void PopulateButtons()
+    {
+        for (int i = 0; i < buttons.Length; i++)
+        {
             buttons[i].PopulateButton(spellItems[i], itemsInventory);
-            
+
         }
     }
-    public void OnGameStart(){
-         foreach(ItemButtonGameController but in gameButtons){
-                but.buttonUsed = false;
+    public void OnGameStart()
+    {
+        foreach (ItemButtonGameController but in gameButtons)
+        {
+            but.buttonUsed = false;
         }
         SetUpGameButtons();
-        
+
 
     }
-    void SetUpGameButtons(){
+    void SetUpGameButtons()
+    {
 
         int i = 0;
-        foreach(ItemButtonMenuController but in buttons){
+        foreach (ItemButtonMenuController but in buttons)
+        {
             //check waht items have been selected and use those in the game
-            
-            if(but.itemSelected){
+
+            if (but.itemSelected)
+            {
                 gameButtons[i].PopulateButton(but.spell);
                 UseItem(but.spellName, but);
                 but.itemSelected = false;
             }
             i++;
         }
-        foreach(ItemButtonGameController but in gameButtons){
-            if(!but.buttonUsed){
+        foreach (ItemButtonGameController but in gameButtons)
+        {
+            if (!but.buttonUsed)
+            {
                 but.gameObject.SetActive(false);
             }
 
         }
     }
 
-    void UseItem(string itemname, ItemButtonMenuController ibmc){
+    void UseItem(string itemname, ItemButtonMenuController ibmc)
+    {
         //using in game, not during game
-        int newAmount =0;
-       // SavedItems tempItems = new SavedItems(0,0);
-        if(itemname == "SlowTime"){
-            newAmount = itemsInventory.timeAmount -1;
-            itemsInventory= new SavedItems(newAmount, itemsInventory.destroyAmount);
+        int newAmount = 0;
+        // SavedItems tempItems = new SavedItems(0,0);
+        if (itemname == "SlowTime")
+        {
+            newAmount = itemsInventory.timeAmount - 1;
+            itemsInventory = new SavedItems(newAmount, itemsInventory.destroyAmount);
             ibmc.UpdateAmount(newAmount);
         }
-        else if(itemname == "DestroyOrbs"){
-            newAmount = itemsInventory.destroyAmount -1;
+        else if (itemname == "DestroyOrbs")
+        {
+            newAmount = itemsInventory.destroyAmount - 1;
             itemsInventory = new SavedItems(itemsInventory.timeAmount, newAmount);
             ibmc.UpdateAmount(newAmount);
         }
-        
+
         //itemsInventory = new SavedItems(tempItems.timeAmount, tempItems.destroyAmount);
         SavingItems();
-        
+
     }
 
-    
+        #region using items in game
     //using items in game in game
-    public void UseItem(string itemName, Animator anim, GameObject go){
-        switch(itemName){
+    public void UseItem(string itemName, Animator anim, GameObject go)
+    {
+        switch (itemName)
+        {
             case "SlowTime":
-            StartCoroutine(SlowDownTime(anim, go));
+                StartCoroutine(SlowDownTime(anim, go));
                 break;
             case "DestroyOrbs":
                 StartCoroutine(DestroyItem(anim, go));
@@ -102,7 +115,8 @@ public class ItemManager : MonoBehaviour
         }
 
     }
-    IEnumerator SlowDownTime(Animator anim, GameObject go){
+    IEnumerator SlowDownTime(Animator anim, GameObject go)
+    {
         Time.timeScale = 0.5f;
         anim.Play("circleExpand");
 
@@ -112,7 +126,8 @@ public class ItemManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         go.SetActive(false);    //anim at some point with the same animator
     }
-    IEnumerator DestroyItem(Animator anim, GameObject go){
+    IEnumerator DestroyItem(Animator anim, GameObject go)
+    {
         anim.Play("circleExpand");
         yield return new WaitForSeconds(0.2f);
         OrbManager.instance.DestroyOrbs();
@@ -120,26 +135,57 @@ public class ItemManager : MonoBehaviour
         go.SetActive(false);    //anim at some point with the same animator
     }
 
+    #endregion
 
+    public void AddingItems(string itemname)
+    {
+        int newAmount = 0;
+        if (itemname == "SlowTime")
+        {
+            newAmount = itemsInventory.timeAmount + 1;
+            itemsInventory = new SavedItems(newAmount, itemsInventory.destroyAmount);
+            //ibmc.UpdateAmount(newAmount);
+        }
+        else if (itemname == "DestroyOrbs")
+        {
+            newAmount = itemsInventory.destroyAmount + 1;
+            itemsInventory = new SavedItems(itemsInventory.timeAmount, newAmount);
+            //ibmc.UpdateAmount(newAmount);
+        }
 
+        foreach(ItemButtonMenuController ib in buttons){
+            if(ib.spellName == itemname){
+                
+                ib.UpdateAmount(newAmount);
 
+            }
+        }
 
-    void LoadingItems(){
+        SavingItems();
+
+    }
+
+    void LoadingItems()
+    {
         itemsInventory = SaveLoad.LoadItems();
     }
-    void SavingItems(){
+    void SavingItems()
+    {
         SaveLoad.SaveItems(itemsInventory.timeAmount, itemsInventory.destroyAmount);
     }
 
 }
-[Serializable]  
-public class SavedItems{
+
+
+[Serializable]
+public class SavedItems
+{
     public SavedItems(int time, int destroy)
     {
         timeAmount = time;
         destroyAmount = destroy;
     }
-    public int timeAmount {get;}
-    public int destroyAmount {get;}
+    public int timeAmount { get; }
+    public int destroyAmount { get; }
 
 }

@@ -30,4 +30,13 @@ public class CoinManager : MonoBehaviour
         SaveLoad.SaveCoins(coins);
         menuCoinsText.text = coins.ToString();
     }
+    public void UseCoins(int price){
+        coins -= price;
+        SaveLoad.SaveCoins(coins);
+        menuCoinsText.text = coins.ToString();
+
+    }
+    public int CheckCoinAmount(){
+        return coins;
+    }
 }

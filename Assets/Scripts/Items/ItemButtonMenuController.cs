@@ -66,6 +66,9 @@ public class ItemButtonMenuController : MonoBehaviour
         itemIcon.sprite = spell.itemIcon;
         //buttonBase.color = spell.itemBackgroundColor;
 
+        amountText.text = amount.ToString();
+        spellName = spell.itemName;
+
         if (spell.itemName == "SlowTime")
         {
             amount = itemamount.timeAmount;
@@ -74,8 +77,8 @@ public class ItemButtonMenuController : MonoBehaviour
         {
             amount = itemamount.destroyAmount;
         }
-        amountText.text = amount.ToString();
-        spellName = spell.itemName;
+        
+        UpdateAmount(amount);
 
         foreach (ParticleSystem ps in bottleParticles)
         {
@@ -107,6 +110,6 @@ public class ItemButtonMenuController : MonoBehaviour
             }
         }
         
-        selectionMark.SetActive(false);
+        selectionMark.SetActive(false); //anim or something here
     }
 }

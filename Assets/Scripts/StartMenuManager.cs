@@ -25,7 +25,8 @@ public class StartMenuManager : MonoBehaviour
 
         StartCoroutine("AbsoluteBeginningofTheGame");
 
-        foreach(GameObject go in otherPanels){
+        foreach (GameObject go in otherPanels)
+        {
             go.SetActive(false);
         }
     }
@@ -83,12 +84,14 @@ public class StartMenuManager : MonoBehaviour
 
     }
 
-    public void UpdateHighScore(int score){
+    public void UpdateHighScore(int score)
+    {
         highScoreText.text = score.ToString();
     }
 
     #region start menu panel switch
-    public void SwitchPanel(string panelName){
+    public void SwitchPanel(string panelName)
+    {
         StartCoroutine(SwitchView(panelName));
     }
     IEnumerator SwitchView(string panelName)
@@ -96,19 +99,24 @@ public class StartMenuManager : MonoBehaviour
         if (panelName == "start")
         {   //returning to first panel
             startPanelAnimator.Play("startPanelShow");
-            if(currentPanel != null){
-                yield return new WaitUntil(()=> startPanelAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default"));
+            if (currentPanel != null)
+            {
+                yield return new WaitUntil(() => startPanelAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default"));
                 currentPanel.SetActive(false);
             }
         }
         else
         {
-            switch(panelName){
+            switch (panelName)
+            {
                 case "help":
                     currentPanel = otherPanels[0];
                     break;
                 case "settings":
                     currentPanel = otherPanels[1];
+                    break;
+                case "shop":
+                    currentPanel = otherPanels[2];
                     break;
                 default:
                     break;

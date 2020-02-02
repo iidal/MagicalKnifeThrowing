@@ -10,6 +10,7 @@ public class SpellItem : ScriptableObject
     public string itemDescription;
     public Color itemBackgroundColor;
     public Sprite itemIcon;
+    public int price;
 
 
 }
