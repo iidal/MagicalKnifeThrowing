@@ -74,6 +74,7 @@
      <Compile Include="Assets\Scripts\Player\ThrowingManager.cs" />
      <Compile Include="Assets\Scripts\StartMenuManager.cs" />
      <Compile Include="Assets\Scripts\StartMenuVFX.cs" />
+     <Compile Include="Assets\Scripts\Tools\DelayTimer.cs" />
      <Compile Include="Assets\Scripts\Tools\particleController.cs" />
      <Compile Include="Assets\Scripts\Tools\SaveLoad.cs" />
      <Compile Include="Assets\SettingsManager.cs" />

@@ -27,7 +27,7 @@ public class ItemButtonGameController : MonoBehaviour
         icon = temp.GetComponent<Image>();
 
          bottleParticles = new ParticleSystem[2];
-        temp = transform.Find("BottleParticles").gameObject;
+        //temp = transform.Find("BottleParticles").gameObject;
         //bottleParticles[0] = tempOb.GetComponent<ParticleSystem>();
         bottleParticles = temp.GetComponentsInChildren<ParticleSystem>();
         buttonAnim = GetComponent<Animator>();
