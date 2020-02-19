@@ -32,9 +32,9 @@ public class OrbManager : MonoBehaviour
 
     //burst
     float burstDelay;
-    float burstDelayMin = 10f;
-    float burstDelayMax = 20f;
-    float burstDuration = 1f;
+    float burstDelayMin = 15f;
+    float burstDelayMax = 25f;
+    public float burstDuration = 2f;
     public bool bursting = false;
 
     //effects for orb spawning
@@ -146,7 +146,7 @@ public class OrbManager : MonoBehaviour
             {
                 Debug.Log("BURST LEVEL IS OVER 9000");
                 enemyAnim.SetBool("bursting", true);
-                yield return new WaitForSeconds(.5f);
+                yield return new WaitForSeconds(.1f);
                 bursting = true;
                 spawnSpeed = 0.3f;
             }
@@ -161,9 +161,6 @@ public class OrbManager : MonoBehaviour
                     enemyAnim.SetBool("bursting", false);
                 }
             }
-
-
-
 
             if (!bursting)
             {

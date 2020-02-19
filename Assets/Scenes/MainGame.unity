@@ -28642,6 +28642,7 @@ MonoBehaviour:
   - {fileID: 167379131}
   - {fileID: 338696597}
   playerPoint: {fileID: 955772827}
+  burstDuration: 2
   bursting: 0
   spawningEffects:
   - {fileID: 1417757102}
@@ -83376,7 +83377,7 @@ GameObject:
   - component: {fileID: 1444464247}
   - component: {fileID: 1444464248}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy (orbs)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
