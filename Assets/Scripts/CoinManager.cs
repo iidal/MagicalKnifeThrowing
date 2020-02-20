@@ -10,8 +10,7 @@ public class CoinManager : MonoBehaviour
     [SerializeField] ItemButtonShopController[] shopButtons;
     int coins = 0;
 
-    [SerializeField]
-    TextMeshProUGUI menuCoinsText;
+    [SerializeField] TextMeshProUGUI menuCoinsText, storeCoinsText;
 
 
     
@@ -38,6 +37,7 @@ public class CoinManager : MonoBehaviour
     {
         coins = SaveLoad.LoadCoins();
         menuCoinsText.text = coins.ToString();
+        storeCoinsText.text = coins.ToString();
         UpdateShopStatus();
 
     }
@@ -46,6 +46,7 @@ public class CoinManager : MonoBehaviour
         coins += co;
         SaveLoad.SaveCoins(coins);
         menuCoinsText.text = coins.ToString();
+        storeCoinsText.text = coins.ToString();
 
        UpdateShopStatus();
 
@@ -55,6 +56,7 @@ public class CoinManager : MonoBehaviour
         coins -= price;
         SaveLoad.SaveCoins(coins);
         menuCoinsText.text = coins.ToString();
+        storeCoinsText.text = coins.ToString();
         UpdateShopStatus();
     }
 
