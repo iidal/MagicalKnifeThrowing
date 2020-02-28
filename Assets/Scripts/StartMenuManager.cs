@@ -74,6 +74,7 @@ public class StartMenuManager : MonoBehaviour
     {
         startButton.enabled = false;
         fadeAnimator.Play("FadeStartMenuIn");
+        startPanelAnimator.Play("ButtonsInStart");
         yield return new WaitForEndOfFrame();
         yield return new WaitUntil(() => fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default"));
         yield return new WaitUntil(() => AudioManager.instance.adjustingVolume == false);

@@ -12,6 +12,7 @@ public class StartMenuVFX : MonoBehaviour
     [SerializeField]
     Transform[] logoEffectPositions; //play particle on different points on logo
     [SerializeField]ParticleSystem[] bottleEffects;
+    [SerializeField]ParticleSystem startButtonEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -46,5 +47,9 @@ public class StartMenuVFX : MonoBehaviour
                 ps.Stop();
             }
         }
+    }
+
+    public void StarButtonEffect(){
+        startButtonEffect.Play();
     }
 }
