@@ -77,13 +77,17 @@ public class StartMenuManager : MonoBehaviour
         startPanelAnimator.Play("ButtonsInStart");
         yield return new WaitForEndOfFrame();
         yield return new WaitUntil(() => fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default"));
-        yield return new WaitUntil(() => AudioManager.instance.adjustingVolume == false);
-        startButton.enabled = true;
-
-        foreach (GameObject go in otherPanels)
+        
+             foreach (GameObject go in otherPanels)
         {
             go.SetActive(false);
         }
+
+        
+        yield return new WaitUntil(() => AudioManager.instance.adjustingVolume == false);
+        startButton.enabled = true;
+
+   
 
     }
 
