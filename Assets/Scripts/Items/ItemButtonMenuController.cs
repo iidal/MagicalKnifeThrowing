@@ -11,7 +11,7 @@ public class ItemButtonMenuController : MonoBehaviour
     public bool itemSelected = false;
     public Image itemIcon;
 
-    public TextMeshProUGUI amountText;
+    public TextMeshProUGUI amountText, amountTextShop;
     public GameObject selectionMark;
     //public Image buttonBase;
     public ParticleSystem[] bottleParticles;
@@ -92,6 +92,7 @@ public class ItemButtonMenuController : MonoBehaviour
     public void UpdateAmount(int amount)
     {
         amountText.text = amount.ToString();
+        amountTextShop.text = amount.ToString();
         if (amount == 0)
         {
             itemButton.interactable = false;

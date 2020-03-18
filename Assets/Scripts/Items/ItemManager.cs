@@ -78,7 +78,7 @@ public class ItemManager : MonoBehaviour
 
     void UseItem(string itemname, ItemButtonMenuController ibmc)
     {
-        //using in game, not during game
+        //using in game, not during game you know
         int newAmount = 0;
         // SavedItems tempItems = new SavedItems(0,0);
         if (itemname == "SlowTime")
