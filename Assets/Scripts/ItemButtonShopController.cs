@@ -52,7 +52,6 @@ public class ItemButtonShopController : MonoBehaviour
         }
     }
     public void CoinUpdate(int coins){
-        Debug.Log("coun update");
         if(coins>= itemPrice){
             buyButton.interactable = true;
         }

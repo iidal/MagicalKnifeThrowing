@@ -38,8 +38,12 @@ public class OrbManager : MonoBehaviour
     public bool bursting = false;
 
     //effects for orb spawning
-    [SerializeField]
-    ParticleSystem[] spawningEffects = new ParticleSystem[2];
+    [SerializeField] ParticleSystem[] spawningEffects = new ParticleSystem[2];
+
+    //audio effect for spawning
+
+    [SerializeField] AudioSource spawnAudio;
+    [SerializeField] AudioClip[] spawnAudioClips;
 
 
     public Camera cam;
@@ -123,8 +127,9 @@ public class OrbManager : MonoBehaviour
         spawningEffects[tempRand].GetComponent<particleController>().ChangeColor(tempContr.mainColor);
         spawningEffects[tempRand].Play();
 
-
-        //AdjustSpawnSpeed();
+        spawnAudio.clip = spawnAudioClips[Random.Range(0, spawnAudioClips.Length)];
+        spawnAudio.pitch = Random.Range(0.9f, 1.1f);
+        spawnAudio.Play();
 
         if (orbSpeed < 3f)
         {

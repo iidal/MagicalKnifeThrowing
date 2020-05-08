@@ -5,7 +5,8 @@ using System;
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager instance;
-
+    [SerializeField] AudioSource itemUsedAudio; // on item button parent obj
+    [SerializeField] AudioClip timeItemClip, timeItemEndClip, destroyItemClip;
     [SerializeField] ItemButtonMenuController[] buttons;    //start menu buttons
     public SpellItem[] spellItems;
 
@@ -86,12 +87,14 @@ public class ItemManager : MonoBehaviour
             newAmount = itemsInventory.timeAmount - 1;
             itemsInventory = new SavedItems(newAmount, itemsInventory.destroyAmount);
             ibmc.UpdateAmount(newAmount);
+            
         }
         else if (itemname == "DestroyOrbs")
         {
             newAmount = itemsInventory.destroyAmount - 1;
             itemsInventory = new SavedItems(itemsInventory.timeAmount, newAmount);
             ibmc.UpdateAmount(newAmount);
+            
         }
 
         //itemsInventory = new SavedItems(tempItems.timeAmount, tempItems.destroyAmount);
@@ -120,20 +123,23 @@ public class ItemManager : MonoBehaviour
     {
         Time.timeScale = 0.5f;
         anim.Play("circleExpand");
-
+        itemUsedAudio.PlayOneShot(timeItemClip);
         yield return new WaitForSeconds(2f);
         Time.timeScale = 1f;
         anim.Play("circleShrink");
+        itemUsedAudio.PlayOneShot(timeItemEndClip);
         yield return new WaitForSeconds(0.5f);
         go.SetActive(false);    //anim at some point with the same animator
     }
     IEnumerator DestroyItem(Animator anim, GameObject go)
     {
         anim.Play("circleExpand");
+        itemUsedAudio.PlayOneShot(destroyItemClip);
         yield return new WaitForSeconds(0.2f);
         OrbManager.instance.DestroyOrbs();
         yield return new WaitForSeconds(0.2f);
         anim.Play("Default");
+        
         go.SetActive(false);    //anim at some point with the same animator
     }
 

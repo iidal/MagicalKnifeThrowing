@@ -1,8 +1,20 @@
-Background music:
-Andrew Isaias https://assetstore.unity.com/packages/audio/ambient/fantasy/warped-fantasy-music-pack-49914
+Most of the sound effects:
+Sidearm Studios
+https://assetstore.unity.com/packages/audio/sound-fx/ultimate-sound-fx-bundle-151756
 
-add other later
+Lightning thunder effect:
+Olivier Girardot
+assetstore.unity.com/packages/audio/sound-fx/free-sound-effects-pack-155776
+
+Background music:
+Andrew Isaias
+assetstore.unity.com/packages/audio/ambient/fantasy/warped-fantasy-music-pack-49914
+
+
 
 VFX:
-start menu electricity effect
-http://jeanmoreno.com/unity/cartoonfxfree/
+electric effect on player
+jeanmoreno.com/unity/cartoonfxfree/
+
+
+FONTS:

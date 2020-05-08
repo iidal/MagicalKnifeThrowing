@@ -62,7 +62,8 @@ public class ThrowingManager : MonoBehaviour
                 k.GetComponent<KnifeController>().StartMove(soc.gameObject.transform, callback, soc);
                 playerAnim.Play("ThrowKnife");
                 throwAS.pitch = Random.Range(0.8f, 1.15f);
-                throwAS.PlayOneShot(throwSounds[Random.Range(0, throwSounds.Count)]);
+                //throwAS.PlayOneShot(throwSounds[Random.Range(0, throwSounds.Count)]);
+                throwAS.PlayOneShot(throwSounds[0]);
                 orbManager.orbs.RemoveAt(i);
                 orbDestroyed = true;
                 yield return null;
@@ -81,7 +82,7 @@ public class ThrowingManager : MonoBehaviour
 
     IEnumerator TappedWrong(){
         blockImage.enabled = true;
-        throwAS.volume = 1f;
+        throwAS.volume = 0.5f;
         throwAS.PlayOneShot(missedOrbClip);
         fuckUpBurst.Play();
         yield return new WaitForSeconds(0.3f);
@@ -92,6 +93,7 @@ public class ThrowingManager : MonoBehaviour
     public void DeleteOrbAndKinfe(SpellOrbController spellOrb){
         spellOrb.DestroyOrb();
         playerManager.AddPoints();
+        orbExplAS.pitch = Random.Range(0.8f, 1f);
         orbExplAS.PlayOneShot(orbExplosionSounds[Random.Range(0, orbExplosionSounds.Count)]);
     }
 }
