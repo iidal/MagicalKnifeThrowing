@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI scoreText;
 
+
     void Start()
     {
         if(instance != null){
@@ -20,6 +21,7 @@ public class PlayerManager : MonoBehaviour
         else{
             instance = this;
         }
+        
     }
 
 
@@ -40,6 +42,9 @@ public class PlayerManager : MonoBehaviour
 
         if(other.tag == "SpellOrb"){
             Debug.Log("game over");
+
+
+
             GameManager.instance.EndGameOrAd();
         }
     }

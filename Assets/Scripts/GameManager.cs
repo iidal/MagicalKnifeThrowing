@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
     public OrbManager orbManager;
     public StartMenuManager startMenuMG;
 
+    AudioSource gmSource;
+    [SerializeField] AudioClip exitingGameClip;
+    [SerializeField] AudioClip orbHitSound;
+
     public GameObject endMenu;
     [SerializeField]
     TextMeshProUGUI endText;
@@ -37,12 +41,22 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+        gmSource = GetComponent<AudioSource>();
         Invoke("LoadGame", 0.1f);
     }
 
-    public void EndGameOrAd()
-    {
+    public void EndGameOrAd(){
+        gmSource.PlayOneShot(orbHitSound);
         orbManager.DestroyOrbs();
+        StartCoroutine("AdOrEndGame");
+    }
+    IEnumerator AdOrEndGame(){
+
+        
+
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.5f);
+
         endMenu.SetActive(true);
         if (!adWatched)
         {
@@ -59,7 +73,13 @@ public class GameManager : MonoBehaviour
 
     public void WatchAd()
     {
-        isGameOver = false;
+        StartCoroutine("WatchedAd");
+      
+    }
+
+    IEnumerator WatchedAd(){
+        yield return new WaitForSeconds(1.5f);
+          isGameOver = false;
         orbManager.StartCreatingOrbs();
         EnvironmentController.instance.StartLoopingEffects();
         adWatched = true;
@@ -111,6 +131,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator Return()
     {
+        //gmSource.PlayOneShot(exitingGameClip);
         EnvironmentController.instance.AdjustingBGMusic("Exit");
         yield return new WaitForSeconds(2f);
         EnvironmentController.instance.AdjustingBGMusic("ToMenu");
