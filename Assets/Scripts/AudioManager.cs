@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     Sprite audioOnIcon;
     [SerializeField]
-    Image audioIcon, inGameAudioIcon;
+    Image audioIcon, audioIconFront, inGameAudioIcon;
     public bool audioOn = true;
 
 
@@ -80,7 +80,8 @@ public class AudioManager : MonoBehaviour
         if(audioOn){
             audioOn = false;
             audioIcon.sprite = audioOffIcon;
-            inGameAudioIcon.sprite = audioOffIcon;
+            audioIconFront.sprite = audioOffIcon;
+            //inGameAudioIcon.sprite = audioOffIcon;
             AudioListener.volume = 0;
             SettingsManager.instance.SaveAudioSettings(false);
 
@@ -88,7 +89,8 @@ public class AudioManager : MonoBehaviour
         else if(!audioOn){
             audioOn = true;
             audioIcon.sprite = audioOnIcon;
-            inGameAudioIcon.sprite = audioOnIcon;
+            audioIconFront.sprite = audioOnIcon;
+            //inGameAudioIcon.sprite = audioOnIcon;
             AudioListener.volume = 1;
             SettingsManager.instance.SaveAudioSettings(true);
 
