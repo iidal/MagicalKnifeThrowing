@@ -86,7 +86,7 @@ public class StartMenuManager : MonoBehaviour
         
         yield return new WaitUntil(() => AudioManager.instance.adjustingVolume == false);
         startButton.enabled = true;
-
+        startButton.GetComponent<Tween>().enabled = true;
    
 
     }
