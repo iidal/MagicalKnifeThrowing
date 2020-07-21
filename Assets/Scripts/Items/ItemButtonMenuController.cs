@@ -15,6 +15,7 @@ public class ItemButtonMenuController : MonoBehaviour
     public GameObject selectionMark;
     //public Image buttonBase;
     public ParticleSystem[] bottleParticles;
+    [SerializeField] ParticleSystem checkmarkParticles;
     public SpellItem spell;
 
 
@@ -112,5 +113,8 @@ public class ItemButtonMenuController : MonoBehaviour
         }
         
         selectionMark.SetActive(false); //anim or something here
+        checkmarkParticles.Play();
+
+
     }
 }
