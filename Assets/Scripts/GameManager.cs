@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         
 
         yield return new WaitForEndOfFrame();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         endMenu.SetActive(true);
         if (!adWatched)
@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator WatchedAd(){
+        PlayerManager.instance.RevivePlayer();
         yield return new WaitForSeconds(1.5f);
           isGameOver = false;
         orbManager.StartCreatingOrbs();
@@ -108,6 +109,7 @@ public class GameManager : MonoBehaviour
             endText.text = "You scored " + score.ToString() + "\nget em coins";
         }
         CoinManager.instance.AddCoins(score);
+        
 
     }
 

@@ -6,7 +6,7 @@ using TMPro;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
-    
+    Animator playerAnim;
 
     public int score = 0;
     [SerializeField]
@@ -21,6 +21,8 @@ public class PlayerManager : MonoBehaviour
         else{
             instance = this;
         }
+
+        playerAnim = GetComponent<Animator>();
         
     }
 
@@ -36,6 +38,7 @@ public class PlayerManager : MonoBehaviour
     public void OnGameStart(){
         score = 0;
         scoreText.text = score.ToString();
+        RevivePlayer();
     }
 
     void OnTriggerEnter2D(Collider2D other){
@@ -43,10 +46,14 @@ public class PlayerManager : MonoBehaviour
         if(other.tag == "SpellOrb"){
             Debug.Log("game over");
 
-
+            playerAnim.Play("playerDeath");
 
             GameManager.instance.EndGameOrAd();
         }
+    }
+
+    public void RevivePlayer(){
+        playerAnim.Play("playerRevive");
     }
 
 
