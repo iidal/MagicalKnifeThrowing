@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     AudioSource gmSource;
     [SerializeField] AudioClip exitingGameClip;
     [SerializeField] AudioClip orbHitSound;
+    [SerializeField] AudioClip reviveSound;
 
     public GameObject endMenu;
     [SerializeField]
@@ -79,7 +80,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator WatchedAd(){
         PlayerManager.instance.RevivePlayer();
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
+        gmSource.PlayOneShot(reviveSound);
+        yield return new WaitForSeconds(1f);
           isGameOver = false;
         orbManager.StartCreatingOrbs();
         EnvironmentController.instance.StartLoopingEffects();
