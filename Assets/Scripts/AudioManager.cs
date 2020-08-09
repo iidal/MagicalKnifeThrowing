@@ -19,9 +19,9 @@ public class AudioManager : MonoBehaviour
     //sike not doing that
     //using audiolistener lol
     [SerializeField]
-    List<AudioSource> effectAudioSources = new List<AudioSource>();
+    List<AudioSource> audioSources = new List<AudioSource>();
     [SerializeField]
-    List<AudioSource> musicAudioSources = new List<AudioSource>();
+    // List<AudioSource> musicAudioSources = new List<AudioSource>();
 
     public AudioSource testSource;
 
@@ -29,25 +29,30 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        if(instance != null){
+        if (instance != null)
+        {
             Destroy(this);
         }
-        else{
+        else
+        {
             instance = this;
         }
-        
+
     }
 
-    public void FadeOut(AudioSource audioSource, float fadeSpeed, float targetVolume){
+    public void FadeOut(AudioSource audioSource, float fadeSpeed, float targetVolume)
+    {
         StartCoroutine(FadeOutSound(audioSource, fadeSpeed, targetVolume));
     }
-    IEnumerator FadeOutSound(AudioSource audioSource, float fadeSpeed, float targetVolume){
+    IEnumerator FadeOutSound(AudioSource audioSource, float fadeSpeed, float targetVolume)
+    {
         adjustingVolume = true;
         float tempVol = audioSource.volume;
         float ogVol = tempVol;
         float t = 0f;
-        
-        while(tempVol>0f){
+
+        while (tempVol > 0f)
+        {
             tempVol = Mathf.Lerp(ogVol, targetVolume, t);
             t += Time.deltaTime;
             audioSource.volume = tempVol;
@@ -55,29 +60,34 @@ public class AudioManager : MonoBehaviour
         }
         adjustingVolume = false;
         //audioSource.volume = ogVol; // put volume back on so it will play more than once if needed
-        
+
 
     }
-    public void FadeIn(AudioSource audioSource, float fadeSpeed, float targetVolume){
+    public void FadeIn(AudioSource audioSource, float fadeSpeed, float targetVolume)
+    {
         StartCoroutine(FadeInSound(audioSource, fadeSpeed, targetVolume));
     }
-    IEnumerator FadeInSound(AudioSource audioSource, float fadeSpeed, float targetVolume){
+    IEnumerator FadeInSound(AudioSource audioSource, float fadeSpeed, float targetVolume)
+    {
         adjustingVolume = true;
         float tempVol = audioSource.volume;
         float t = 0f;
-        while(tempVol<targetVolume){
+        while (tempVol < targetVolume)
+        {
             tempVol = Mathf.Lerp(0, targetVolume, t);
             t += Time.deltaTime;
             audioSource.volume = tempVol;
             yield return new WaitForSeconds(fadeSpeed);
         }
         adjustingVolume = false;
-        
+
 
     }
 
-    public void ToggleAudio(){
-        if(audioOn){
+    public void ToggleAudio()
+    {
+        if (audioOn)
+        {
             audioOn = false;
             audioIcon.sprite = audioOffIcon;
             audioIconFront.sprite = audioOffIcon;
@@ -86,7 +96,8 @@ public class AudioManager : MonoBehaviour
             SettingsManager.instance.SaveAudioSettings(false);
 
         }
-        else if(!audioOn){
+        else if (!audioOn)
+        {
             audioOn = true;
             audioIcon.sprite = audioOnIcon;
             audioIconFront.sprite = audioOnIcon;
@@ -94,6 +105,68 @@ public class AudioManager : MonoBehaviour
             AudioListener.volume = 1;
             SettingsManager.instance.SaveAudioSettings(true);
 
+        }
+
+    }
+
+    public void WarpVolume(bool down)
+    {
+        StartCoroutine("VolumeWarp", down);
+        Debug.Log("warp");
+    }
+    IEnumerator VolumeWarp(bool down)
+    {
+        //NO WORKY YET
+
+
+        //time warp item
+        float t = 0;
+        float p; //new pitch
+        float minimum = 0.6f;
+        float maximum = 1f; ;
+        float checker = maximum; ; //check when target is reached (maximum value)
+
+        //kinda dumb way to do this but well im dumb too 
+        //down == true, pitch goes down
+        if (down)
+        {   
+            p = 1f;
+            checker = minimum;
+            while (p > checker)
+            {
+                p = Mathf.Lerp(maximum, minimum, t);
+
+
+                t += 8f * Time.deltaTime;
+
+                foreach (AudioSource source in audioSources)
+                {
+                    source.pitch = p;
+
+
+                }
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        else
+        {   
+            p = 0f;
+            checker = maximum;
+            while (p < checker)
+            {
+                p = Mathf.Lerp(minimum, maximum, t);
+
+
+                t += 8f * Time.deltaTime;
+
+                foreach (AudioSource source in audioSources)
+                {
+                    source.pitch = p;
+
+
+                }
+                yield return new WaitForSeconds(0.05f);
+            }
         }
 
     }

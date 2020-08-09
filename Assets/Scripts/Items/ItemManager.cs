@@ -123,11 +123,13 @@ public class ItemManager : MonoBehaviour
     {
         Time.timeScale = 0.5f;
         anim.Play("circleExpand");
+        AudioManager.instance.WarpVolume(true);
         itemUsedAudio.PlayOneShot(timeItemClip);
         yield return new WaitForSeconds(2f);
         Time.timeScale = 1f;
         anim.Play("circleShrink");
         itemUsedAudio.PlayOneShot(timeItemEndClip);
+        AudioManager.instance.WarpVolume(false);
         yield return new WaitForSeconds(0.5f);
         go.SetActive(false);    //anim at some point with the same animator
     }

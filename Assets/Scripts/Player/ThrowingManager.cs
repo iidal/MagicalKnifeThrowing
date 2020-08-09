@@ -93,7 +93,7 @@ public class ThrowingManager : MonoBehaviour
     public void DeleteOrbAndKinfe(SpellOrbController spellOrb){
         spellOrb.DestroyOrb();
         playerManager.AddPoints();
-        orbExplAS.pitch = Random.Range(0.8f, 1f);
+        //orbExplAS.pitch = Random.Range(0.8f, 1f);
         orbExplAS.PlayOneShot(orbExplosionSounds[Random.Range(0, orbExplosionSounds.Count)]);
     }
 }
