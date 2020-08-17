@@ -102,14 +102,14 @@ public class GameManager : MonoBehaviour
         if (score > highScore)
         {
             highScore = score;
-            endText.text = "New high score!" + score.ToString() + "! Good job b\nget em coins";
+            endText.text = "New high score! " + score.ToString() + " points!\n<size=80%>you earned " + score.ToString() + " coins";
             SaveLoad.SaveHighScore(score);
             startMenuMG.UpdateHighScore(score);
 
         }
         else
         {
-            endText.text = "You scored " + score.ToString() + "\nget em coins";
+            endText.text = "You scored " + score.ToString() + " points\n<size=80%>and earned " + score.ToString() + " coins";
         }
         CoinManager.instance.AddCoins(score);
         

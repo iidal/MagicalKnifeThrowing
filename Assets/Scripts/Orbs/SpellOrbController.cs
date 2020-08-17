@@ -65,6 +65,9 @@ public class SpellOrbController : MonoBehaviour
 
 
     public void DestroyOrb(){
+
+        ThrowingManager.instance.TestiTektiVaihto();
+
         foreach(GameObject go in route){
             Destroy(go);
             

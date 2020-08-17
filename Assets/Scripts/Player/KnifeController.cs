@@ -24,7 +24,7 @@ public class KnifeController : MonoBehaviour
             yield return new WaitForSeconds(0);
 
             // Check if the position of the cube and sphere are approximately equal.
-            if (Vector3.Distance(transform.position, target.position) < 0.1f)
+            if (Vector3.Distance(transform.position, target.position) <= 0.3f)
             {
                 callback(orb);
                 break;
