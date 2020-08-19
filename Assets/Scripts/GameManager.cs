@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
         orbManager.DestroyOrbs();
         endMenuPart1.SetActive(false);
         endMenuPart2.SetActive(true);
+        
         isGameOver = true;
 
 

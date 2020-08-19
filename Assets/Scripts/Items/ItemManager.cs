@@ -27,10 +27,10 @@ public class ItemManager : MonoBehaviour
         {
             instance = this;
         }
-          LoadingItems();
+        LoadingItems();
         Invoke("PopulateButtons", 0.1f);
 
-      
+
 
     }
     void PopulateButtons()
@@ -87,14 +87,14 @@ public class ItemManager : MonoBehaviour
             newAmount = itemsInventory.timeAmount - 1;
             itemsInventory = new SavedItems(newAmount, itemsInventory.destroyAmount);
             ibmc.UpdateAmount(newAmount);
-            
+
         }
         else if (itemname == "DestroyOrbs")
         {
             newAmount = itemsInventory.destroyAmount - 1;
             itemsInventory = new SavedItems(itemsInventory.timeAmount, newAmount);
             ibmc.UpdateAmount(newAmount);
-            
+
         }
 
         //itemsInventory = new SavedItems(tempItems.timeAmount, tempItems.destroyAmount);
@@ -141,11 +141,23 @@ public class ItemManager : MonoBehaviour
         OrbManager.instance.DestroyOrbs();
         yield return new WaitForSeconds(0.2f);
         anim.Play("Default");
-        
+
         go.SetActive(false);    //anim at some point with the same animator
     }
 
     #endregion
+
+    public void UnusedItems()
+    {
+        foreach (ItemButtonGameController item in gameButtons)
+        {
+            //for now play breaking anim no matter if item is used or not
+            if (!item.itemUsed && item.buttonUsed)
+            {
+                item.buttonAnim.Play("bottleBreak");
+            }
+        }
+    }
 
     public void AddingItems(string itemname)
     {
@@ -163,9 +175,11 @@ public class ItemManager : MonoBehaviour
             //ibmc.UpdateAmount(newAmount);
         }
 
-        foreach(ItemButtonMenuController ib in buttons){
-            if(ib.spellName == itemname){
-                
+        foreach (ItemButtonMenuController ib in buttons)
+        {
+            if (ib.spellName == itemname)
+            {
+
                 ib.UpdateAmount(newAmount);
 
             }
