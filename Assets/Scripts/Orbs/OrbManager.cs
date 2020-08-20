@@ -71,17 +71,7 @@ public class OrbManager : MonoBehaviour
 
 
     void Update(){
-        // if(Input.GetKeyUp(KeyCode.Space)){
-        //     Debug.Log("sss");
-        //     if(testBool){
-        //         enemyAnim.SetBool("bursting",false);
-        //         testBool = false;
-        //     }
-        //     else{
-        //         enemyAnim.SetBool("bursting", true);
-        //         testBool = true;
-        //     }
-        // }
+
     }
 
 

@@ -48,25 +48,22 @@ public class GameManager : MonoBehaviour
 
     public void EndGameOrAd(){
         gmSource.PlayOneShot(orbHitSound);
-        orbManager.DestroyOrbs();
+        
         StartCoroutine("AdOrEndGame");
     }
     IEnumerator AdOrEndGame(){
 
-        
+        isGameOver = true;
 
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.05f);
+        orbManager.DestroyOrbs();
+        yield return new WaitForSeconds(0.95f);
 
         endMenu.SetActive(true);
-        if (!adWatched)
+        if (adWatched)
         {
-            
-            isGameOver = true;
-            
-        }
-        else
-        {
+
             
             GameOver();
         }
