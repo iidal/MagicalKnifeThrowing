@@ -148,7 +148,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 30
-  m_Sprite: {fileID: 21300000, guid: 98b445cf3c79d7e4bb67a535316e51b0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 43107ec524e332a4b895502e9d3fecd3, type: 3}
   m_Color: {r: 0.6901961, g: 0.8196079, b: 0.227451, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -361,4 +361,5 @@ MonoBehaviour:
   speed: 0.5
   destroyBursts: {fileID: 1593238258705100326, guid: cf0ca4e014a5660458e82ddcda77ab66,
     type: 3}
+  mainColor: {r: 0, g: 0, b: 0, a: 0}
   orbBaseSprite: {fileID: 1418493126174256617}

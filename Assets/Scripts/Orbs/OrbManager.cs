@@ -139,7 +139,6 @@ public class OrbManager : MonoBehaviour
             burstDelay -= Time.deltaTime;
             if (burstDelay < 0 && !bursting)
             {
-                Debug.Log("BURST LEVEL IS OVER 9000");
                 enemyAnim.SetBool("bursting", true);
                 yield return new WaitForSeconds(.1f);
                 bursting = true;
