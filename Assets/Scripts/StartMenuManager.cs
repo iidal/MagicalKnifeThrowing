@@ -76,14 +76,14 @@ public class StartMenuManager : MonoBehaviour
         fadeAnimator.Play("FadeStartMenuIn");
         startPanelAnimator.Play("ButtonsInStart");
         yield return new WaitForEndOfFrame();
-        yield return new WaitUntil(() => fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default"));
+        yield return new WaitForSeconds(0.2f);  //just trying to avoid bugs and the next line takes too long
+        //yield return new WaitUntil(() => fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default"));
         
              foreach (GameObject go in otherPanels)
         {
             go.SetActive(false);
         }
 
-        
         yield return new WaitUntil(() => AudioManager.instance.adjustingVolume == false);
         startButton.enabled = true;
         startButton.GetComponent<Tween>().enabled = true;

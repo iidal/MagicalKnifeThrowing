@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
         
         isGameOver = true;
 
+        level = 1;
 
         int score = PlayerManager.instance.score;
 
@@ -118,7 +119,7 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = false;
         adWatched = false;
-        level = 1;
+        level = 1; //just in case do this again
         orbManager.StartCreatingOrbs();
         //PlayerManager.instance.OnGameStart(); //too late if called here
         EnvironmentController.instance.StartLoopingEffects();

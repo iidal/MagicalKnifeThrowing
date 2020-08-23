@@ -33,7 +33,7 @@ public class EnvironmentController : MonoBehaviour
         BGmusicSource = GetComponent<AudioSource>();
         BGmusicSource.clip = menuMusicClip;
         BGmusicSource.volume = 0f;
-        AudioManager.instance.FadeIn(BGmusicSource, 0.05f, 0.3f);
+        AudioManager.instance.FadeIn(BGmusicSource, 0.01f, 0.3f);
         BGmusicSource.Play();
     }
 

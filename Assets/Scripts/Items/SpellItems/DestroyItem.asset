@@ -21,4 +21,4 @@ MonoBehaviour:
     type: 3}
   brokenItemRight: {fileID: -4507355299835992221, guid: 0ee5bc79dc48765408102657a85dd6eb,
     type: 3}
-  price: 1
+  price: 50

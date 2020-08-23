@@ -100,8 +100,14 @@ public class OrbManager : MonoBehaviour
 
     void CreateOrb()
     {
+
+        if (orbSpeed < 3f)  //check what speed to assign to orb
+        {
+            float increase = ((float)GameManager.instance.level * 4) / 100;
+            orbSpeed = defaultOrbSpeed + increase;
+        }
+
         int rand = Random.Range(0, orbPrefabs.Length);
-        //int posRand = Random.Range(0, 2); //which startposition to use
         GameObject go = Instantiate(orbPrefabs[rand], startPositions[rand].position, Quaternion.identity);
 
         SpellOrbController tempContr = go.GetComponent<SpellOrbController>();
@@ -114,22 +120,18 @@ public class OrbManager : MonoBehaviour
         {
             tempRand = 1;
         }
-        spawningEffects[tempRand].GetComponent<particleController>().ChangeColor(tempContr.mainColor);
+        spawningEffects[tempRand].GetComponent<particleController>().ChangeColor(tempContr.mainColor);  //effects on spawn
         spawningEffects[tempRand].Play();
 
         spawnAudio.clip = spawnAudioClips[Random.Range(0, spawnAudioClips.Length)];
         spawnAudio.pitch = Random.Range(0.9f, 1.1f);
         spawnAudio.Play();
 
-        if (orbSpeed < 3f)
-        {
-            float increase = ((float)GameManager.instance.level * 4) / 100;
-            orbSpeed = defaultOrbSpeed + increase;
-        }
+     
 
     }
 
-    IEnumerator AdjustSpawnSpeed()
+    IEnumerator AdjustSpawnSpeed() // u wanna see some real speed (should we burst again)
     {
         burstDelay = Random.Range(burstDelayMin, burstDelayMax);
 
