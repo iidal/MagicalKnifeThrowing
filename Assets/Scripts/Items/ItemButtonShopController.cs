@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ItemButtonShopController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ItemButtonShopController : MonoBehaviour
     public Button buyButton;
     string itemName;
     int itemPrice;
+    public TextMeshProUGUI itemPriceTag;
     [SerializeField] ItemButtonMenuController[] menuButtons;
 
 
@@ -18,8 +20,13 @@ public class ItemButtonShopController : MonoBehaviour
         GameObject tempOb = transform.Find("ItemIcon").gameObject;
         //item icon
         itemIcon = tempOb.GetComponent<Image>();
+        itemPriceTag = tempOb.GetComponentInChildren<TextMeshProUGUI>(); //pricetag
         tempOb = transform.GetChild(1).gameObject;  //idk why using find didnt workd
         buyButton =  tempOb.GetComponent<Button>();
+        
+        //GameObject tempOb2 = tempOb.transform.Find("PriceTag").gameObject;
+        
+        
         PopulateButton();
     }
 
@@ -29,6 +36,7 @@ public class ItemButtonShopController : MonoBehaviour
         itemIcon.sprite = spell.itemIcon;
         itemName = spell.itemName;
         itemPrice = spell.price;
+        itemPriceTag.text = itemPrice.ToString();
     }
     public void BuyItem()
     {
