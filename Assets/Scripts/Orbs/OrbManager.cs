@@ -212,6 +212,13 @@ public class OrbManager : MonoBehaviour
         tempPoint2.transform.position = new Vector2(Random.Range(orbColumns[index].x, orbColumns[index].y), 0.45f);
         points[1] = tempPoint2;
         //3rd point
+        //if we are changing to ver 2 of the button lay out, point 3 will have to be done differently for first and last column
+        if(index ==0)
+            index =1;
+        if(index ==3)
+            index=2;
+        
+        Debug.Log(index);
         GameObject tempPoint3 = new GameObject("point3");
         tempPoint3.transform.position = new Vector2(Random.Range(orbColumns[index].x, orbColumns[index].y), -1.3f);
         points[2] = tempPoint3;
@@ -226,6 +233,7 @@ public class OrbManager : MonoBehaviour
     }
     void GetRouteArea()
     {
+        //dividing game area to four areas, for each orb type
         Vector3 p = cam.ViewportToWorldPoint(new Vector3(1, 0, cam.nearClipPlane));
         middlePointMax = p.x;
         p = cam.ViewportToWorldPoint(new Vector3(0, 0, cam.nearClipPlane));
