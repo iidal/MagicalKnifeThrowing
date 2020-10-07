@@ -205,20 +205,21 @@ public class OrbManager : MonoBehaviour
         //start point
         GameObject tempPoint1 = new GameObject("point1");
         tempPoint1.transform.position = startPositions[index].position;
-        //tempPoint1.transform.position = new Vector2(Random.Range(point1min, point1max), 2.6f);
         points[0] = tempPoint1;
         //2nd point
-        GameObject tempPoint2 = new GameObject("point2");
-        tempPoint2.transform.position = new Vector2(Random.Range(orbColumns[index].x, orbColumns[index].y), 0.45f);
-        points[1] = tempPoint2;
-        //3rd point
-        //if we are changing to ver 2 of the button lay out, point 3 will have to be done differently for first and last column
+
+        //if we are changing to ver 2 or 3 of the button lay out, point 3 will have to be done differently for first and last column
         if(index ==0)
             index =1;
         if(index ==3)
             index=2;
+        GameObject tempPoint2 = new GameObject("point2");
+        tempPoint2.transform.position = new Vector2(Random.Range(orbColumns[index].x, orbColumns[index].y), 0.45f);
+        points[1] = tempPoint2;
+        //3rd point
+
         
-        Debug.Log(index);
+      //  Debug.Log(index);
         GameObject tempPoint3 = new GameObject("point3");
         tempPoint3.transform.position = new Vector2(Random.Range(orbColumns[index].x, orbColumns[index].y), -1.3f);
         points[2] = tempPoint3;
