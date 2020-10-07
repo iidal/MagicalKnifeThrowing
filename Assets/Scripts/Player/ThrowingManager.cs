@@ -13,6 +13,8 @@ public class ThrowingManager : MonoBehaviour
     public GameObject knife;
     public Transform knifeSpawn;
 
+    public Button[] orbButtons;
+
     Animator playerAnim;
 
     public delegate void ThrowAndDelete(SpellOrbController o);  //destroying knife and orb when they meet
@@ -38,7 +40,6 @@ public class ThrowingManager : MonoBehaviour
     float throwAsOgVol;
     #endregion
 
-    public TextMeshProUGUI testiteksti;
 
    
 
@@ -54,10 +55,6 @@ public class ThrowingManager : MonoBehaviour
             instance = this;
         }
 
-    }
-
-    public void TestiTektiVaihto(){
-        testiteksti.text ="tuhoa se vitun orb";
     }
 
 
@@ -77,7 +74,7 @@ public class ThrowingManager : MonoBehaviour
         {
             if (soc.icon == icon)
             {
-                testiteksti.text = "oikea orbsi";
+                
 
 
                 ThrowAndDelete callback = DeleteOrbAndKinfe;
@@ -104,18 +101,24 @@ public class ThrowingManager : MonoBehaviour
     }
 
     IEnumerator TappedWrong(){
-        blockImage.enabled = true;
+        //blockImage.enabled = true;
+        foreach(Button b in orbButtons){
+            b.interactable = false;
+        }
+        
         throwAS.volume = 0.5f;
         throwAS.PlayOneShot(missedOrbClip);
         fuckUpBurst.Play();
         yield return new WaitForSeconds(0.3f);
-        blockImage.enabled = false;
+        //blockImage.enabled = false;
+           foreach(Button b in orbButtons){
+            b.interactable = true;
+        }
         throwAS.volume = throwAsOgVol;
     }
 
     public void DeleteOrbAndKinfe(SpellOrbController spellOrb){
 
-        testiteksti.text = "NONIIN TUHOTTU";
 
 
         spellOrb.DestroyOrb();
