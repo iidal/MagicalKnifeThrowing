@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
             endText.text = "You scored " + score.ToString() + " points\n<size=80%>and earned " + score.ToString() + " coins";
         }
         CoinManager.instance.AddCoins(score);
-        
+       // BannerManager.instance.ToggleMenuBanner(true);
 
     }
 
@@ -126,6 +126,8 @@ public class GameManager : MonoBehaviour
 
         endMenuPart1.SetActive(true);
         endMenuPart2.SetActive(false);
+
+        
 
     }
     #region  back to menu
