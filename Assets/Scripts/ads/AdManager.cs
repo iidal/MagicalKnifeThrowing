@@ -8,9 +8,14 @@ public class AdManager : MonoBehaviour, IUnityAdsListener
     string placement = "rewardedVideo";
     string gameID = "3855559";
    
+   AudioSource adAudio;
+   public AudioClip coinRewardAudio;
+   public GameObject confirmReviveObj;
 
     void Start()
-    {
+    {   
+        confirmReviveObj.SetActive(false);
+        adAudio = GetComponent<AudioSource>();
         Advertisement.AddListener(this);
         Advertisement.Initialize(gameID, true);
         // while(!Advertisement.IsReady(placement))
@@ -32,10 +37,12 @@ public class AdManager : MonoBehaviour, IUnityAdsListener
             if(placementId == "CoinsEarned"){
                 Debug.Log("coins");
                 CoinManager.instance.AddCoins(25);
+                adAudio.PlayOneShot(coinRewardAudio);
             }
             else if(placementId == "rewardedVideo"){
                 Debug.Log("revive");
-                GameManager.instance.WatchAd();
+                confirmReviveObj.SetActive(true);
+                //GameManager.instance.WatchAd();
 
             }
         }
