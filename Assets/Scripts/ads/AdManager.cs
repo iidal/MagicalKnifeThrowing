@@ -18,9 +18,6 @@ public class AdManager : MonoBehaviour, IUnityAdsListener
         adAudio = GetComponent<AudioSource>();
         Advertisement.AddListener(this);
         Advertisement.Initialize(gameID, true);
-        // while(!Advertisement.IsReady(placement))
-        //     yield return null;
-        // Advertisement.Show(placement);
     }
 
     public void ShowAd(string adType){
@@ -31,18 +28,18 @@ public class AdManager : MonoBehaviour, IUnityAdsListener
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
     {
-        //throw new System.NotImplementedException();
+       
         if(showResult == ShowResult.Finished){
-            Debug.Log("reward");
+            
             if(placementId == "CoinsEarned"){
-                Debug.Log("coins");
+                
                 CoinManager.instance.AddCoins(25);
                 adAudio.PlayOneShot(coinRewardAudio);
             }
             else if(placementId == "rewardedVideo"){
-                Debug.Log("revive");
+                
                 confirmReviveObj.SetActive(true);
-                //GameManager.instance.WatchAd();
+                
 
             }
         }

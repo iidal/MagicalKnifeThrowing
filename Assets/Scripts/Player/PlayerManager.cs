@@ -44,7 +44,7 @@ public class PlayerManager : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
 
         if(other.tag == "SpellOrb"){
-            Debug.Log("game over");
+
 
             playerAnim.Play("playerDeath");
 
